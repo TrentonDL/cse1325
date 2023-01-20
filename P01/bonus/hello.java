@@ -1,5 +1,3 @@
-package P01.bonus;
-
 import java.util.Scanner;
 
 public class hello {
