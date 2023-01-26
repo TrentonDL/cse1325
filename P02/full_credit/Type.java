@@ -1,3 +1,3 @@
-public enum Type{Snake, Lizard, 
-
+public enum Type {
+    "Snake", "Lizard", "Alligator", "Turtle";
 }
