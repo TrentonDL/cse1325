@@ -8,6 +8,7 @@ public class Pet {
 
     public Double humanAge() {
         this.age = humanLifeSpan;
+        return age;
     }
 
     private String name;
