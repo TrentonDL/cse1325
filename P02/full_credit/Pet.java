@@ -1,18 +1,18 @@
 import java.lang.ProcessBuilder.Redirect.Type;
 
 public class Pet {
+    public Pet(String name, Double age, Type type){
+        this.name = name;
+        this.age = age;
+        this.type = type;
+    }
+
     @Override
     public String toString(){
         return name + " is a " + type + " age " + age;
     }
 
-    public Double humanAge() {
-        this.age = humanLifeSpan;
-        return age;
-    }
-
     private String name;
     private Type type;
     private Double age;
-    private static final Double humanLifeSpan = 80.0;
 }
