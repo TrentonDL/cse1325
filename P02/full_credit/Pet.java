@@ -1,5 +1,3 @@
-import java.lang.ProcessBuilder.Redirect.Type;
-
 public class Pet {
     public Pet(String name, Double age, Type type){
         this.name = name;
