@@ -1,5 +1,5 @@
 public class Pet {
-    public Pet(String name, Double age, Type type){
+    public Pet(String name, Double age, Type type) {
         this.name = name;
         this.age = age;
         this.type = type;
