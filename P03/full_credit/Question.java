@@ -5,24 +5,35 @@ public class Question {
         this.question = question;
         this.answers = answers;
         this.rightAnswer = rightAnswer;
+
+        if(rightAnswer < 1 || rightAnswer > answers.size()){
+            throw new IllegalArgumentException("Invaild Answer Choice");
+        }
     }
 
     public Boolean checkAnswer(int answer){
-        this.answer = answer;
+        return (answer == rightAnswer);
     }
 
     @Override
     public String toString(){
-        return nextQuestionNumber + ". " + question + "\n";
+        String s = 
+        System.out.println(nextQuestionNumber + ". " + question);
+        int a = 1;
+        for(String Answer : answers){
+            System.out.println("   " + a + ") " + Answer);
+            ++a;
+        }
+        return;
     }
 
     private String question;
 
-    private ArrayList<String> answers; 
+    private ArrayList<String> answers;
 
     private int rightAnswer;
 
     private int nextQuestionNumber = 1;
 
-    private int final questionNUmber;
+    private final int questionNumber = ++nextQuestionNumber;
 }
