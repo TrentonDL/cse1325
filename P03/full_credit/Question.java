@@ -17,14 +17,13 @@ public class Question {
 
     @Override
     public String toString(){
-        String s = 
-        System.out.println(nextQuestionNumber + ". " + question);
+        StringBuilder s = new StringBuilder(nextQuestionNumber + ". " + question + "\n");
         int a = 1;
         for(String Answer : answers){
-            System.out.println("   " + a + ") " + Answer);
+            s.append("   " + a + ") " + Answer + " \n");
             ++a;
         }
-        return;
+        return s.toString();
     }
 
     private String question;
