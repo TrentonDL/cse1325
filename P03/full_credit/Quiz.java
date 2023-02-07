@@ -18,7 +18,6 @@ public class Quiz {
         answers2.add(3,"Mark Cuban");
         answers2.add(4,"Joe Rogan");
         questions[1] = new Question("Which animal is not real?", answers2, 1);
-       
     }
 
     public Double takeQuiz(){

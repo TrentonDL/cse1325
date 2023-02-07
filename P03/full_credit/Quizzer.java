@@ -1,7 +1,7 @@
 public class Quizzer {
     public static void main(String[] args) {
         try{
-            Double result = Quiz.takeQuiz() * 100;
+            Double result = Quiz.takeQuiz();
 
             System.out.println("Your grade : " + result);
         }catch (IllegalArgumentException i){
