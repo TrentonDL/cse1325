@@ -32,7 +32,6 @@ public class Quiz {
         Scanner input = new Scanner(System.in);
 
         for(Question q: questions){
-            proposedAnswer = 0;
             System.out.println(q);
             System.out.print("Enter your answer: ");
             proposedAnswer = input.nextInt();
