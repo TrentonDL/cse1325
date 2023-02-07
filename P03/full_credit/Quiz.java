@@ -2,43 +2,46 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Quiz {
-    private Question[] questions;
+    private ArrayList<Question> questions;
+
+    public Quiz(){
+        this.questions = new ArrayList<>();
+    }
 
     private void loadQuiz(){
         ArrayList<String> answers1 = new ArrayList<>();
-        answers1.add(1, "Dog");
-        answers1.add(2, "Snake");
-        answers1.add(3,"Dragon");
-        answers1.add(4,"Spider");
-        questions[0] = new Question("Which animal is not real?", answers1, 3);
+        answers1.add( "Dog");
+        answers1.add( "Snake");
+        answers1.add("Dragon");
+        answers1.add("Spider");
+        questions.add(new Question("Which animal is not real?", answers1, 2));
         
         ArrayList<String> answers2 = new ArrayList<>();
-        answers2.add(1, "Bill Gates");
-        answers2.add(2, "Jeff Bazos");
-        answers2.add(3,"Mark Cuban");
-        answers2.add(4,"Joe Rogan");
-        questions[1] = new Question("Which animal is not real?", answers2, 1);
+        answers2.add( "Bill Gates");
+        answers2.add( "Jeff Bazos");
+        answers2.add("Mark Cuban");
+        answers2.add("Joe Rogan");
+        questions.add(new Question("Who founded Microsoft?", answers2, 0));
     }
 
-    public Double takeQuiz(){
+    public double takeQuiz(){
         loadQuiz();
         int proposedAnswer = 0;
-        Double correctAnswer = 0.0;
-        int totalQuestions = questions.length;
+        int correctAnswer = 0;
+        int totalQuestions = questions.size();
+        Scanner input = new Scanner(System.in);
 
         for(Question q: questions){
-            q.toString();
-            Scanner in = new Scanner(System.in);
-            System.out.printf("\nEnter your answer: ");
-            in.nextInt(proposedAnswer);
-            in.close();
-            for(int i=0; i<totalQuestions ; i++){
-                if( Boolean.TRUE.equals(questions[i].checkAnswer(i))){
-                    ++correctAnswer;
-                }
+            proposedAnswer = 0;
+            System.out.println(q);
+            System.out.print("Enter your answer: ");
+            proposedAnswer = input.nextInt();
+            if(q.checkAnswer(proposedAnswer)){
+                ++correctAnswer;
             }
+            
         }
-
-        return (correctAnswer/totalQuestions);
+        input.close();
+        return (correctAnswer/(double)totalQuestions) * 100;
     }
 }

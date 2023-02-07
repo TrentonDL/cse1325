@@ -6,14 +6,13 @@ public class Question {
         this.answers = answers;
         this.rightAnswer = rightAnswer;
         this.questionNumber = nextQuestionNumber++;
-        
-        if(rightAnswer < 1 || rightAnswer > answers.size()){
-            throw new IllegalArgumentException("Invaild Answer Choice");
-        }
     }
 
-    public Boolean checkAnswer(int answer){
-        return (answer == rightAnswer);
+    public boolean checkAnswer(int answer){
+        if(answer < 1 || answer >= answers.size()){
+            throw new IllegalArgumentException("Invaild Answer Choice");
+        }
+        return (answer-1 == rightAnswer);
     }
 
     @Override
