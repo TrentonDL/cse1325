@@ -6,7 +6,7 @@ public class Quizzer {
     
             System.out.println("Your grade : " + grade);
         }catch (IllegalArgumentException i){
-            System.err.println("Invaild Argument Entered");
+            System.err.println("Invaild Answer Choice");
             System.exit(-1);
         } 
     }
