@@ -5,7 +5,8 @@ public class Question {
         this.question = question;
         this.answers = answers;
         this.rightAnswer = rightAnswer;
-
+        this.questionNumber = nextQuestionNumber++;
+        
         if(rightAnswer < 1 || rightAnswer > answers.size()){
             throw new IllegalArgumentException("Invaild Answer Choice");
         }
@@ -17,7 +18,7 @@ public class Question {
 
     @Override
     public String toString(){
-        StringBuilder s = new StringBuilder(nextQuestionNumber + ". " + question + "\n");
+        StringBuilder s = new StringBuilder(questionNumber + ". " + question + "\n");
         int a = 1;
         for(String Answer : answers){
             s.append("   " + a + ") " + Answer + " \n");
@@ -32,7 +33,7 @@ public class Question {
 
     private int rightAnswer;
 
-    private int nextQuestionNumber = 1;
+    private static int nextQuestionNumber = 1;
 
-    private final int questionNumber = ++nextQuestionNumber;
+    private final int questionNumber;
 }

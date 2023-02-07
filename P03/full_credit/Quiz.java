@@ -18,26 +18,23 @@ public class Quiz {
         answers2.add(3,"Mark Cuban");
         answers2.add(4,"Joe Rogan");
         questions[1] = new Question("Which animal is not real?", answers2, 1);
-        questions[i].checkAnswer(0);
+       
     }
 
     public Double takeQuiz(){
         loadQuiz();
         int proposedAnswer = 0;
         Double correctAnswer = 0.0;
-        Double totalQuestions = 0.0;
+        int totalQuestions = questions.length;
 
         Scanner in = new Scanner(System.in);
         System.out.printf("\nEnter your answer: ");
         in.nextInt(proposedAnswer);
         in.close();
-
-        if(Question.checkAnswer(proposedAnswer)){
-            ++correctAnswer;
-            ++totalQuestions;
-        }
-        else{
-            ++totalQuestions;
+        for(int i=0; i<totalQuestions ; i++){
+            if( Boolean.TRUE.equals(questions[i].checkAnswer(i))){
+                ++correctAnswer;
+            }
         }
         return (correctAnswer/totalQuestions);
     }
