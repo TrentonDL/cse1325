@@ -1,3 +1,3 @@
 public enum Type {
-    Snake, Lizard, Alligator, Turtle
+    SNAKE, LIZARD, ALLIGATOR, TURTLE
 }
