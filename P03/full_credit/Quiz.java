@@ -5,8 +5,6 @@ public class Quiz {
     private Question[] question;
 
     private void loadQuiz(){
-        Question[] question;
-    
         ArrayList<String> answers1 = new ArrayList<>();
         answers1.add(1, "Dog");
         answers1.add(2, "Snake");
@@ -20,7 +18,6 @@ public class Quiz {
         answers2.add(3,"Mark Cuban");
         answers2.add(4,"Joe Rogan");
         question[1] = new Question("Which animal is not real?", answers2, 1);
-       
     }
 
     public Double takeQuiz(){
@@ -33,6 +30,9 @@ public class Quiz {
         System.out.printf("\nEnter your answer: ");
         in.nextInt(proposedAnswer);
         in.close();
+
+        Question 
+
         if(Question.checkAnswer(proposedAnswer)){
             ++correctAnswer;
             ++totalQuestions;
