@@ -26,15 +26,19 @@ public class Quiz {
         Double correctAnswer = 0.0;
         int totalQuestions = questions.length;
 
-        Scanner in = new Scanner(System.in);
-        System.out.printf("\nEnter your answer: ");
-        in.nextInt(proposedAnswer);
-        in.close();
-        for(int i=0; i<totalQuestions ; i++){
-            if( Boolean.TRUE.equals(questions[i].checkAnswer(i))){
-                ++correctAnswer;
+        for(Question q: questions){
+            q.toString();
+            Scanner in = new Scanner(System.in);
+            System.out.printf("\nEnter your answer: ");
+            in.nextInt(proposedAnswer);
+            in.close();
+            for(int i=0; i<totalQuestions ; i++){
+                if( Boolean.TRUE.equals(questions[i].checkAnswer(i))){
+                    ++correctAnswer;
+                }
             }
         }
+
         return (correctAnswer/totalQuestions);
     }
 }

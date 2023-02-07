@@ -28,12 +28,8 @@ public class Question {
     }
 
     private String question;
-
     private ArrayList<String> answers;
-
     private int rightAnswer;
-
     private static int nextQuestionNumber = 1;
-
     private final int questionNumber;
 }
