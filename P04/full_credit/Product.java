@@ -3,6 +3,7 @@ abstract class Product {
         this.name = name;
         this.cost = cost;
     }
+
     abstract double price(){
 
     } 
@@ -10,7 +11,7 @@ abstract class Product {
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return super.toString();
+        return ;//super.toString();
     }
 
     protected double cost;
