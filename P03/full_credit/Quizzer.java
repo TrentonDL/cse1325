@@ -1,12 +1,15 @@
 public class Quizzer {
     public static void main(String[] args) {
-        try{
-            Double result = Quiz.takeQuiz();
+        Quiz resultQuiz = new Quiz();
+        resultQuiz.takeQuiz();
 
-            System.out.println("Your grade : " + result);
+        System.out.println("Your grade : " + resultQuiz);
+        
+        /*try{
+
         }catch (IllegalArgumentException i){
             System.err.println("Invaild Argument Entered");
             System.exit(-1);
-        } 
+        } */
     }
 }
