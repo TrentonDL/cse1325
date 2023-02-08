@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Store {
-
-    private static ArrayList<Product> products = new ArrayList<>();
-
     public static int main(String[] args) {
         products.add(new Product("Milk", 4.43));
         products.add(new Product("Dr.Pepper", 6.48));
@@ -12,6 +9,9 @@ public class Store {
         products.add(new Product("Water", 3.48));
         products.add(new Product("Vanilla Ice Cream", 7.98));
         products.add(new Product("Laundry Detergent", 27.24));
+
+        Scanner input = new Scanner(System.in);
+        int choice = -1;
 
         do{
             System.out.printf("%24=\n");
@@ -22,15 +22,23 @@ public class Store {
                 System.out.printf("%d", i++);
                 System.out.println(p);
             }
-
+            double total = 0;
             System.out.printf("\nCurrent Order\n%13-\n\n");
             for(Product c: shoppingCart){
                 System.out.println(c);
+                total += c.cost;
             }
-            Scanner input = new Scanner(System.in);
+            System.out.println("Total Cost: " + total);
+            System.out.println("Buy which product?");
+            
+            input.nextInt(choice);
 
-        }while();
+            if(choice >= 0){
+                shoppingCart.add(products.get(choice));
+            }
+        }while(choice >= 0);
     }
+    private static ArrayList<Product> products = new ArrayList<>();
 
-    private ArrayList<Product> shoppingCart = new ArrayList<>();
+    private static ArrayList<Product> shoppingCart = new ArrayList<>();
 }
