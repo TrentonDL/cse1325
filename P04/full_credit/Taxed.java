@@ -1,7 +1,12 @@
 public class Taxed extends Product{
-    private static final double tax = 0.0;
+    private static final double salesTaxRate = 0.0;
 
-    public static setTaxRate(double salesTax){
-        this.salesTax = 
+    public static  double setTaxRate(double salesTaxRate){
+        return 0.0825;
+    }
+
+    @Override
+    double price() {
+        return cost * (1 + salesTaxRate);
     }
 }
