@@ -9,7 +9,7 @@ public class Question {
     }
 
     public boolean checkAnswer(int answer){
-        if(answer < 1 || answer >= answers.size()){
+        if(answer < 1 || answer > answers.size()){
             throw new IllegalArgumentException("Invaild Answer Choice");
         }
         return (answer-1 == rightAnswer);
