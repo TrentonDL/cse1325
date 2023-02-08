@@ -14,7 +14,7 @@ abstract class Product {
     
     @Override
     public String toString() {
-        return name + " ($" + cost + ") /t/t/t/t$  " + price();
+        return ") " + name + " ($" + cost + ") /t/t/t/t$  " + price();
     }
 
     protected double cost;
