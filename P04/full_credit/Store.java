@@ -3,27 +3,27 @@ import java.util.Scanner;
 
 public class Store {
     public static int main(String[] args) {
-        products.add(new Product("Milk", 4.43));
-        products.add(new Product("Dr.Pepper", 6.48));
-        products.add(new Product("Eggs", 4.25));
-        products.add(new Product("Water", 3.48));
-        products.add(new Product("Vanilla Ice Cream", 7.98));
-        products.add(new Product("Laundry Detergent", 27.24));
+        products.add(new product("Milk", 4.43));
+        products.add(new product("Dr.Pepper", 6.48));
+        products.add(new product("Eggs", 4.25));
+        products.add(new product("Water", 3.48));
+        products.add(new product("Vanilla Ice Cream", 7.98));
+        products.add(new product("Laundry Detergent", 27.24));
 
         Scanner input = new Scanner(System.in);
         int choice = -1;
 
         do{
-            System.out.printf("%24=\n");
+            System.out.printf("%24= %n");
             System.out.println("  Welcome to the Store  ");
-            System.out.printf("%24=\n\n");
+            System.out.printf("%24= %n%n");
             int i = 0;
             for (Product p : products) {
                 System.out.printf("%d", i++);
                 System.out.println(p);
             }
             double total = 0;
-            System.out.printf("\nCurrent Order\n%13-\n\n");
+            System.out.printf("%nCurrent Order%n%13-%n%n");
             for(Product c: shoppingCart){
                 System.out.println(c);
                 total += c.cost;
@@ -38,7 +38,7 @@ public class Store {
             }
         }while(choice >= 0);
     }
-    private static ArrayList<Product> products = new ArrayList<>();
 
+    private static ArrayList<Product> products = new ArrayList<>();
     private static ArrayList<Product> shoppingCart = new ArrayList<>();
 }

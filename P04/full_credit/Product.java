@@ -1,16 +1,7 @@
 abstract class Product {
-    public Product(String name, double cost){
-        this.name = name;
-        this.cost = cost;
+    abstract void product(String name, double cost);
 
-        if(cost < 0){
-            throw new IllegalArgumentException("Cost cannot be negative");
-        }
-    }
-
-    abstract double price(){
-        return cost;
-    } 
+    abstract double price();
     
     @Override
     public String toString() {
