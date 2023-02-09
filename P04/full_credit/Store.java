@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 public class Store {
     public static int main(String[] args) {
-        products.add(new product("Milk", 4.43));
-        products.add(new product("Dr.Pepper", 6.48));
-        products.add(new product("Eggs", 4.25));
-        products.add(new product("Water", 3.48));
-        products.add(new product("Vanilla Ice Cream", 7.98));
-        products.add(new product("Laundry Detergent", 27.24));
+        products.add(Product("Milk", 4.43));
+        products.add(Product("Dr.Pepper", 6.48));
+        products.add(Product("Eggs", 4.25));
+        products.add(Product("Water", 3.48));
+        products.add(Product("Vanilla Ice Cream", 7.98));
+        products.add(Product("Laundry Detergent", 27.24));
 
         Scanner input = new Scanner(System.in);
         int choice = -1;

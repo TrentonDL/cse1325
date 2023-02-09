@@ -9,4 +9,10 @@ public class Taxed extends Product{
     double price() {
         return cost * (1 + salesTaxRate);
     }
+
+    void Product(String name, double cost) {
+        Product("Vanilla Ice Cream", 7.98);
+        Product("Laundry Detergent", 27.24);
+        Product("Dr.Pepper", 6.48);
+    }
 }
