@@ -14,5 +14,7 @@ public class Taxed extends Product{
         Product("Vanilla Ice Cream", 7.98);
         Product("Laundry Detergent", 27.24);
         Product("Dr.Pepper", 6.48);
+
+        super(Product);
     }
 }
