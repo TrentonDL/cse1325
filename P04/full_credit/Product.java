@@ -1,12 +1,12 @@
 abstract class Product {
-    abstract void Product(String name, double cost){
+    public void Product(String name, double cost){
         this.name = name;
         this.cost = cost;
 
         if(cost < 0){
             throw new IllegalArgumentException("Cost cannot be negative");
         }
-    };
+    }
 
     abstract double price();
     

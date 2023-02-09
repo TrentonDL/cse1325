@@ -1,11 +1,9 @@
 public class Taxfree extends Product {
     
-    void Product(String name, double cost) {
-        Product("Water", 3.48);
-        Product("Eggs", 4.25);
-        Product("Milk", 4.43);
-
-        super(Product);
+    public void Product(String name, double cost) {
+        super("Water", 3.48);
+        super("Eggs", 4.25);
+        super("Milk", 4.43);
     }
 
     @Override

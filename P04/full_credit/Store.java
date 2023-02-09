@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 public class Store {
     public static int main(String[] args) {
-        products.add(new Taxfree.Product("Milk", 4.43));
-        products.add(new Taxed.Product("Dr.Pepper", 6.48));
-        products.add(new Taxfree.Product("Eggs", 4.25));
-        products.add(new Taxfree.Product("Water", 3.48));
-        products.add(new Taxed.Product("Vanilla Ice Cream", 7.98));
-        products.add(new Taxed.Product("Laundry Detergent", 27.24));
+        products.add(new Taxfree.Product());
+        products.add(new Taxed.Product());
+        //products.add(new Taxfree.Product("Eggs", 4.25));
+        //products.add(new Taxfree.Product("Water", 3.48));
+        //products.add(new Taxed.Product("Vanilla Ice Cream", 7.98));
+        //products.add(new Taxed.Product("Laundry Detergent", 27.24));
 
         Scanner input = new Scanner(System.in);
         int choice = -1;
@@ -28,9 +28,8 @@ public class Store {
                 System.out.println(c);
                 total += c.cost;
             }
-            System.out.println("Total Cost: " + total);
+            System.out.printf("Total Cost: $ %.2lf%n", total);
             System.out.println("Buy which product?");
-            
             input.nextInt(choice);
 
             if(choice >= 0){

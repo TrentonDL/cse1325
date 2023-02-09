@@ -10,11 +10,9 @@ public class Taxed extends Product{
         return cost * (1 + salesTaxRate);
     }
 
-    void Product(String name, double cost) {
-        Product("Vanilla Ice Cream", 7.98);
-        Product("Laundry Detergent", 27.24);
-        Product("Dr.Pepper", 6.48);
-
-        super(Product);
+    public void Product(String name, double cost) {
+        super("Vanilla Ice Cream", 7.98);
+        super("Laundry Detergent", 27.24);
+        super("Dr.Pepper", 6.48);
     }
 }
