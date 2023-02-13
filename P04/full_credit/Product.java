@@ -1,5 +1,5 @@
-abstract class Product {
-    public void Product(String name, double cost){
+public abstract class Product {
+    public Product(String name, double cost){
         this.name = name;
         this.cost = cost;
 

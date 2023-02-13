@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Store {
-    public static int main(String[] args) {
-        products.add(new Taxfree.Product());
-        products.add(new Taxed.Product());
-        //products.add(new Taxfree.Product("Eggs", 4.25));
-        //products.add(new Taxfree.Product("Water", 3.48));
-        //products.add(new Taxed.Product("Vanilla Ice Cream", 7.98));
-        //products.add(new Taxed.Product("Laundry Detergent", 27.24));
+    public static void main(String[] args) {
+        products.add(new Taxfree("water", 3.48));
+        products.add(new Taxed("Vannilla Ice Cream", 7.98));
+        products.add(new Taxfree("Eggs", 4.25));
+        products.add(new Taxfree("Water", 3.48));
+        products.add(new Taxed("Vanilla Ice Cream", 7.98));
+        products.add(new Taxed("Laundry Detergent", 27.24));
 
         Scanner input = new Scanner(System.in);
         int choice = -1;
@@ -36,6 +36,7 @@ public class Store {
                 shoppingCart.add(products.get(choice));
             }
         }while(choice >= 0);
+        input.close();
     }
 
     private static ArrayList<Product> products = new ArrayList<>();
