@@ -4,16 +4,14 @@ public class Taxed extends Product{
         cost = price(cost);
     }
 
-    private static double salesTaxRate = 0.0;
+    private static double salesTaxRate = 0.0825;
 
-    public static  double setTaxRate(double salesTaxRate){
-        salesTaxRate = 0.0825;
-        return salesTaxRate;
+    public static void setTaxRate(double salesTaxRate){
+        Taxed.salesTaxRate = salesTaxRate;
     }
 
     @Override
     double price(double cost) {
-        setTaxRate(salesTaxRate);
-        return (cost * (1 + salesTaxRate));
+        return (cost * (1 + Taxed.salesTaxRate));
     }
 }
