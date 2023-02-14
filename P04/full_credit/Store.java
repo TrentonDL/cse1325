@@ -14,30 +14,28 @@ public class Store {
             int choice = 0;
 
             do{
-                System.out.printf("======================== \n");
+                System.out.println("=".repeat(24));
                 System.out.println("  Welcome to the Store  ");
-                System.out.printf("======================== \n\n");
+                System.out.println("=".repeat(24) + "\n");
                 int i = 0;
                 for (Product p : products) {
                     System.out.printf("%d) ", i++);
                     System.out.println(p);
                 }
                 double total = 0;
-                System.out.printf("\nCurrent Order\n-------------\n\n");
+                System.out.println("\nCurrent Order");
+                System.out.println("-".repeat(13) + "\n");
                 for(Product c: shoppingCart){
                     System.out.println(c);
                     total += c.price(c.cost);
                 }
-                System.out.printf("Total Cost: $ %.2f\n", total);
+                System.out.printf("Total Cost: $ %.2f%n", total);
                 System.out.println("Buy which product?");
 
                 choice = input.nextInt();
 
                 if(choice >= 0){
                     shoppingCart.add(products.get(choice));
-                }
-                else{
-                    System.out.printf("\n\nYour Total is: $ %.2f\n", total);
                 }
             }while(choice >= 0);
             input.close();
