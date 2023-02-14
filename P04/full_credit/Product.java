@@ -8,11 +8,14 @@ public abstract class Product {
         }
     }
 
-    abstract double price();
+    abstract double price(double cost);
     
     @Override
     public String toString() {
-        return ") " + name + " ($" + cost + ") /t/t/t/t$  " + price();
+        if(name.equals("Vanilla Ice Cream") || name.equals("Laundry Detergent"))
+            return name + " ($" + cost + ") \t\t\t\t $ " + price(cost);
+        else
+            return name + " ($" + cost + ") \t\t\t\t\t $ " + price(cost);
     }
 
     protected double cost;
