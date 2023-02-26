@@ -13,9 +13,14 @@ public class Customer {
         return name + "(" + email + ")";
     }
 
-    @Overide
-    public boolean equals(){
-        
+    @Override
+    public boolean equals(Object o){
+        if(this == o)
+            return true;
+        if(o == null || getClass() != o.getClass()) 
+            return false;
+        final Customer that = (Customer) o;
+        return (that.email.contains("@")) && (that.email.contains("."));
     }
 
     private String name;
