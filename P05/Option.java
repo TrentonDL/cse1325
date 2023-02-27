@@ -8,7 +8,6 @@ public class Option {
         if(cost < 0){
             throw new IllegalArgumentException("Error: Cost Cannot be Negative");
         }
-
         return cost/100;
     }
 
@@ -17,6 +16,16 @@ public class Option {
         return name + "(" + cost() + ")";
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(this == o)
+            return true;
+        if(o == null || getClass() != o.getClass()) 
+            return false;
+        final Option that = (Option) o;
+        return (that.cost() > 0);
+    }
+    
     protected String name;
     protected long cost;
 }

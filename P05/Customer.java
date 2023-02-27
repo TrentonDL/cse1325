@@ -3,7 +3,7 @@ public class Customer {
         this.name = name;
         this.email = email;
 
-        if((!(email.contains("@")) && !(email.contains(".")))){
+        if((!(name.equals(email)))){
             throw new IllegalArgumentException("Error: Invaild Email Address");
         }
     }
