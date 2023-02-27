@@ -6,7 +6,7 @@ public class Order {
     }
 
     public void addComputer(Computer computer){
-        computers.add(new Computer(computer));
+        computers.add(computer);
     }
 
     @Override
