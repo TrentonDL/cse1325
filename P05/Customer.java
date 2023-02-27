@@ -20,7 +20,15 @@ public class Customer {
         if(o == null || getClass() != o.getClass()) 
             return false;
         final Customer that = (Customer) o;
-        return (that.email.contains("@")) && (that.email.contains("."));
+        email.toLowerCase();
+        name.toLowerCase();
+        String[] parts = name.split(" ");
+        boolean valid = false;
+        for (String string : parts) {
+            if(that.email.contains(string))
+                valid = true;
+        }
+        return valid;
     }
 
     private String name;
