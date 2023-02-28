@@ -28,7 +28,7 @@ public class Order {
         final Order that = (Order) o;
         boolean valid = false;
         for (Computer computer : computers) {
-            if(computer == that.computer)
+            if(computer == Computer)
                 valid = true;
             else
                 valid = false;

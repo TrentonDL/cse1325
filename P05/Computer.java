@@ -28,6 +28,17 @@ public class Computer {
         return s.toString();
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(this == o)
+            return true;
+        if(o == null || getClass() != o.getClass()) 
+            return false;
+        final Computer that = (Computer) o;
+        String computer = name + " (" + model + ")";
+        return (computer == that.toString());
+    }
+
     private String name;
     private String model;
     private ArrayList<Option> options;
