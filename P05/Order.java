@@ -4,6 +4,7 @@ public class Order {
     public Order(Customer customer){
         this.customer = customer;
         this.orderNumber = nextOrderNumber++;
+        this.computers = new ArrayList<>();
     }
 
     public void addComputer(Computer computer){

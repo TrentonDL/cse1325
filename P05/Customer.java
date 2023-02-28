@@ -1,9 +1,11 @@
+import java.util.regex.*;
+
 public class Customer {
     public Customer(String name, String email){
         this.name = name;
         this.email = email;
 
-        if((!(name.equals(email)))){
+        if(!Pattern.matches("^([-a-zA-Z0-9_.]+)@([-a-zA-Z0-9_.]+).([a-zA-Z]{2,5})$", email)){
             throw new IllegalArgumentException("Error: Invaild Email Address");
         }
     }

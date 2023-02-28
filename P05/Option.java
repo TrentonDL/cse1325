@@ -2,30 +2,30 @@ public class Option {
     public Option(String name, long cost) {
         this.name = name;
         this.cost = cost;
-    }
-
-    public long cost(){
-        if(cost < 0){
+        if (cost < 0) {
             throw new IllegalArgumentException("Error: Cost Cannot be Negative");
         }
-        return cost/100;
+    }
+
+    public long cost() {
+        return this.cost;
     }
 
     @Override
-    public String toString(){
-        return name + "(" + cost() + ")";
+    public String toString() {
+        return name + "($" + this.cost / 100.0 + ")";
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o)
+    public boolean equals(Object o) {
+        if (this == o)
             return true;
-        if(o == null || getClass() != o.getClass()) 
+        if (o == null || this.getClass() != o.getClass())
             return false;
         final Option that = (Option) o;
-        return (that.toString() == this.toString());
+        return (that.toString().equals(this.toString()));
     }
-    
+
     protected String name;
     protected long cost;
 }
