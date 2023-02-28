@@ -23,7 +23,7 @@ public class Option {
         if(o == null || getClass() != o.getClass()) 
             return false;
         final Option that = (Option) o;
-        return (that.cost() > 0);
+        return (that.toString() == this.toString());
     }
     
     protected String name;

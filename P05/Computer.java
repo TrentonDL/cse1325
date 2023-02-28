@@ -35,8 +35,7 @@ public class Computer {
         if(o == null || getClass() != o.getClass()) 
             return false;
         final Computer that = (Computer) o;
-        String computer = name + " (" + model + ")";
-        return (computer == that.toString());
+        return (this.toString() == that.toString());
     }
 
     private String name;

@@ -17,18 +17,10 @@ public class Customer {
     public boolean equals(Object o){
         if(this == o)
             return true;
-        if(o == null || getClass() != o.getClass()) 
-            return false;
+        if(o == null || this.getClass() != o.getClass()) 
+            return false;        
         final Customer that = (Customer) o;
-        email.toLowerCase();
-        name.toLowerCase();
-        String[] parts = name.split(" ");
-        boolean valid = false;
-        for (String string : parts) {
-            if(that.email.contains(string))
-                valid = true;
-        }
-        return valid;
+        return (this.name == that.name) && (this.email == that.email);
     }
 
     private String name;

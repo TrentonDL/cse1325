@@ -7,7 +7,7 @@ public class Order {
     }
 
     public void addComputer(Computer computer){
-        computers.add(computer);
+        this.computers.add(computer);
     }
 
     @Override
@@ -26,14 +26,19 @@ public class Order {
         if(o == null || getClass() != o.getClass()) 
             return false;
         final Order that = (Order) o;
-        boolean valid = false;
-        for (Computer computer : computers) {
-            if(computer == Computer)
-                valid = true;
-            else
-                valid = false;
+        if (!this.customer.equals(that.customer)) {
+            return false;
         }
-        return valid;
+        if (this.computers.size() != that.computers.size()) {
+            return false;
+        }
+        for (int index = 0; index < this.computers.size(); index++) {
+            Computer thisComp = this.computers.get(index);
+            Computer thatComp = that.computers.get(index);
+            if (!thisComp.equals(thatComp))
+                return false;
+        }
+        return true;
     }
 
     private static long nextOrderNumber = 0;
