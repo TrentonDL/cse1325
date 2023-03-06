@@ -1,3 +1,5 @@
+package store;
+
 public class Option {
     public Option(String name, long cost) {
         this.name = name;
