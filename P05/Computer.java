@@ -8,7 +8,7 @@ public class Computer {
     }
     
     public void addOption(Option option){
-        this.options.add(new Option(option.name, option.cost));
+        this.options.add(option);
     }
 
     public long cost(){
