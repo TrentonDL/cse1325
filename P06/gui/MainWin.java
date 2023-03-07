@@ -15,6 +15,10 @@ import javax.swing.UIManager;        // to access default icons
 
 import org.w3c.dom.events.Event;
 
+import store.Computer;
+import store.Customer;
+import store.Store;
+
 import javax.swing.JLabel;           // text or image holder
 import javax.swing.ImageIcon;        // holds a custom icon
 import javax.swing.SwingConstants;   // useful values for Swing method calls
@@ -135,11 +139,32 @@ public class MainWin extends JFrame {
     // Listeners
     
     protected void onInsertCustomerClick() {
+        try{
+            Customer newbieCustomer;
+            String email;
 
+            String name = JOptionPane.showInputDialog(this, "Name of the new Customer!","Input Name", JOptionPane.QUESTION_MESSAGE);
+            if(name == null){
+                throw new IllegalArgumentException("Error: We have to call you something");
+            }
+            email = JOptionPane.showInputDialog(this, "Enter Customer's email address: ", "Input Email", JOptionPane.QUESTION_MESSAGE);
+            if(email == null){
+                throw new IllegalArgumentException("Error: We need your email address");
+            }
+            Store.add(new store.Customer(name, email));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"ERROR",e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            onInsertCustomerClick();
+        }
     }
 
     protected void onInsertComputerClick() {
-
+        try{
+            Computer newComputer;
+            String name;
+            String model;
+            JButton
+        }
     }
     protected void onInsertOptionClick() {
 
