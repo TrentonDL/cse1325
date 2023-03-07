@@ -219,7 +219,7 @@ public class MainWin extends JFrame {
                 onViewClick(Record.COMPUTER);
             }
             else{
-                throw new NullPointerException("A working Computer need parts in it")
+                throw new NullPointerException("A working Computer need parts in it");
             }
         } catch(NullPointerException e) {
         } catch (Exception e){
