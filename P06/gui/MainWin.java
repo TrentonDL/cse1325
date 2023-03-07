@@ -204,6 +204,7 @@ public class MainWin extends JFrame {
                 JOptionPane.showInputDialog(this, "Computer model", 
                     "New Computer", JOptionPane.QUESTION_MESSAGE)
             );
+            
             JComboBox<Object> cb = new JComboBox<>(store.options());
             int optionsAdded = 0; // Don't add computers with no options
             while(true) {
@@ -217,7 +218,10 @@ public class MainWin extends JFrame {
                 store.add(c);
                 onViewClick(Record.COMPUTER);
             }
-        } catch(NullPointerException e){
+            else{
+                throw new NullPointerException("A working Computer need parts in it")
+            }
+        } catch(NullPointerException e) {
         } catch (Exception e){
             JOptionPane.showMessageDialog(this,e.getMessage(),"Computer Not Created", JOptionPane.ERROR_MESSAGE);
         }
