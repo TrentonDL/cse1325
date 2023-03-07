@@ -51,10 +51,11 @@ public class MainWin extends JFrame {
         JMenuBar menubar = new JMenuBar();
         
         JMenu     file        = new JMenu("File");
-        JMenuItem open        = new JMenuItem("Open");
-        JMenuItem save        = new JMenuItem("Save");
-        JMenuItem saveAs      = new JMenuItem("Save As");
-        JMenuItem quit        = new JMenuItem("Quit");
+        JMenuItem fnew        = new JMenuItem("New");
+        JMenuItem fopen        = new JMenuItem("Open");
+        JMenuItem fsave        = new JMenuItem("Save");
+        JMenuItem fsaveAs      = new JMenuItem("Save As");
+        JMenuItem fquit        = new JMenuItem("Quit");
 
         JMenu     insert      = new JMenu("Insert");
         JMenuItem icustomer   = new JMenuItem("Customer");
@@ -71,10 +72,11 @@ public class MainWin extends JFrame {
         JMenu     help        = new JMenu("Help");
         JMenuItem about       = new JMenuItem("About");
         
-        open.addActionListener(event -> onOpenClick());
-        save.addActionListener(event -> onSaveClick());
-        saveAs.addActionListener(event -> onSaveAsClick());
-        quit.addActionListener(event -> onQuitClick());
+        fnew.addActionListener(event -> onNewClick());
+        fopen.addActionListener(event -> onOpenClick());
+        fsave.addActionListener(event -> onSaveClick());
+        fsaveAs.addActionListener(event -> onSaveAsClick());
+        fquit.addActionListener(event -> onQuitClick());
 
         icustomer.addActionListener(event -> onInsertCustomerClick());
         ioption.addActionListener(event -> onInsertOptionClick());
@@ -86,11 +88,11 @@ public class MainWin extends JFrame {
 
         about.addActionListener(event -> onAboutClick());
 
-        
-        file.add(open);
-        file.add(save);
-        file.add(saveAs);
-        file.add(quit);
+        file.add(fnew);
+        file.add(fopen);
+        file.add(fsave);
+        file.add(fsaveAs);
+        file.add(fquit);
         insert.add(icustomer);
         insert.add(ioption);
         insert.add(icomputer);
@@ -379,6 +381,10 @@ public class MainWin extends JFrame {
         about.setVisible(true);
     }
     */
+    protected void onNewClick(){
+        
+    }
+
     protected void onOpenClick(){
 
     }
