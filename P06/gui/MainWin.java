@@ -1,4 +1,5 @@
 package gui;
+
 import javax.swing.JFrame;           // for main window
 import javax.swing.JOptionPane;      // for standard dialogs
 // import javax.swing.JDialog;          // for custom dialogs (for alternate About dialog)
@@ -59,13 +60,11 @@ public class MainWin extends JFrame {
 
         quit.addActionListener(event -> onQuitClick());
         icustomer.addActionListener(event -> onInsertCustomerClick());
-        ioption.addActionListener(event -> onInsertOPtionClick());
-        icomputer.addActionListener(event -> onInsertComputer());
-        iorder.addActionListener(event -> onInsertOrderClick());
-        vcustomer.addActionListener(event -> onViewCustomerClick());
-        voption.addActionListener(event -> onViewOptionClick());
-        vcomputer.addActionListener(event -> onViewComputerClick());
-        vorder.addActionListener(event -> onViewOrderClick());
+        ioption.addActionListener(event -> onInsertOptionClick());
+        icomputer.addActionListener(event -> onInsertComputerClick());
+        vcustomer.addActionListener(event -> onViewClick(Record.CUSTOMER));
+        voption.addActionListener(event -> onViewClick(Record.OPTION));
+        vcomputer.addActionListener(event -> onViewClick(Record.COMPUTER));
         about.addActionListener(event -> onAboutClick());
 
         
@@ -86,7 +85,7 @@ public class MainWin extends JFrame {
         menubar.add(view);
         menubar.add(help);
         setJMenuBar(menubar);
-        
+        /* 
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
@@ -111,12 +110,18 @@ public class MainWin extends JFrame {
         toolbar.addSeparator();
 
         getContentPane().add(toolbar, BorderLayout.PAGE_START);
-        
+        */
         
         // /////////////////////////// ////////////////////////////////////////////
-        // S T I C K S   D I S P L A Y
-        // Provide a text entry box to show the remaining sticks
+        // C O M P U T E R  D I S P L A Y
+        // Provide a text entry box to show the available Computers
+        computers = new JLabel();
+        computers.setFont(new Font("SansSerif", Font.BOLD, 18));
+        add(computers, BorderLayout.CENTER);
 
+        customers = new JLabel();
+        customers.setFont(new Font("SansSerif", Font.BOLD, 15));
+        add(customers, BorderLayout.CENTER);
 
         // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
         // Provide a status bar for game messages
@@ -129,13 +134,20 @@ public class MainWin extends JFrame {
     
     // Listeners
     
-    protected void onRulesClick() {             // Show the rules
-        String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
-            "The two players alternate taking 1 to 3 sticks from the pile.\n" +
-            "The goal is to force your opponent to take the last stick (called misère rules).\n" +
-            "If the computer button is up, it's a two player game. If down, the computer is always Player 2.)";
-        JOptionPane.showMessageDialog(this, s, "The Rules of Nim", JOptionPane.PLAIN_MESSAGE);
+    protected void onInsertCustomerClick() {
+
     }
+
+    protected void onInsertComputerClick() {
+
+    }
+    protected void onInsertOptionClick() {
+
+    }
+    protected void onViewClick(Record record) {
+
+    }
+
     protected void onAboutClick() {                 // Display About dialog
         JLabel logo = null;
         try {
@@ -203,9 +215,10 @@ public class MainWin extends JFrame {
         
         about.setSize(450,400);
         about.setVisible(true);
-     }
-*/
+    }
+    */
     protected void onQuitClick() {System.exit(0);}   // Exit the store
 
-
+    private JLabel computers;
+    private JLabel customers;
 }
