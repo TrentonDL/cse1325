@@ -8,6 +8,7 @@ import javax.swing.JMenu;            // menu selection that offers another menu
 import javax.swing.JMenuItem;        // menu selection that does something
 import javax.swing.JToolBar;         // row of buttons under the menu
 import javax.swing.JButton;          // regular button
+import javax.swing.JComboBox;
 import javax.swing.JToggleButton;    // 2-state button
 import javax.swing.BorderFactory;    // manufacturers Border objects around buttons
 import javax.swing.Box;              // to create toolbar spacer
@@ -17,6 +18,8 @@ import org.w3c.dom.events.Event;
 
 import store.Computer;
 import store.Customer;
+import store.Option;
+import store.Order;
 import store.Store;
 
 import javax.swing.JLabel;           // text or image holder
@@ -27,6 +30,7 @@ import javax.imageio.ImageIO;        // loads an image from a file
 
 import java.io.File;                 // opens a file
 import java.io.IOException;          // reports an error reading from a file
+import java.lang.StackWalker.Option;
 import java.util.ArrayList;
 import java.awt.BorderLayout;        // layout manager for main window
 import java.awt.FlowLayout;          // layout manager for About dialog
@@ -195,17 +199,28 @@ public class MainWin extends JFrame {
 
     protected void onInsertComputerClick() {
         try{
-            String name = JOptionPane.showInputDialog(this, "Name of the new Computer: ","Input Computer Name", JOptionPane.QUESTION_MESSAGE);
-            if(name == null || name.equals("")){
-                throw new IllegalArgumentException("Error: Every Computer needs a name");
+            Computer c = new Computer(
+                JOptionPane.showInputDialog(this, "Computer name", 
+                    "New Computer", JOptionPane.QUESTION_MESSAGE),
+                JOptionPane.showInputDialog(this, "Computer model", 
+                    "New Computer", JOptionPane.QUESTION_MESSAGE)
+            );
+            JComboBox<Object> cb = new JComboBox<>(store.options());
+            int optionsAdded = 0; // Don't add computers with no options
+            while(true) {
+                int button = JOptionPane.showConfirmDialog(this, cb, 
+                    "Another Option?", JOptionPane.YES_NO_OPTION);
+                if(button != JOptionPane.YES_OPTION) break;
+                c.addOption((Option) cb.getSelectedItem());
+                ++optionsAdded;
             }
-            String model = JOptionPane.showInputDialog(this, "Enter the computer's model name: ", "Input Computer Model", JOptionPane.QUESTION_MESSAGE);
-            if(model == null || model.equals("")){
-                throw new IllegalArgumentException("Error: Gotta have a model Number");
+            if(optionsAdded > 0) {
+                store.add(c);
+                onViewClick(Record.COMPUTER);
             }
-            store.add(new Computer(name, model));
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch(NullPointerException e){
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage(),"Computer Not Created", JOptionPane.ERROR_MESSAGE);
         }
         
     }
