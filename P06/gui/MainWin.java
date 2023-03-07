@@ -27,7 +27,7 @@ import javax.imageio.ImageIO;        // loads an image from a file
 
 import java.io.File;                 // opens a file
 import java.io.IOException;          // reports an error reading from a file
-
+import java.util.ArrayList;
 import java.awt.BorderLayout;        // layout manager for main window
 import java.awt.FlowLayout;          // layout manager for About dialog
 
@@ -148,9 +148,9 @@ public class MainWin extends JFrame {
             if(email == null || name.equals("")){
                 throw new IllegalArgumentException("Error: We need your email address");
             }
-            //store.Store.add(new store.Customer(name, email));
+            store.add(new Customer(name, email));
         }catch (Exception e){
-            JOptionPane.showMessageDialog(this,"ERROR",e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
             onInsertCustomerClick();
         }
     }
@@ -165,11 +165,12 @@ public class MainWin extends JFrame {
             if(model == null || model.equals("")){
                 throw new IllegalArgumentException("Error: Gotta have a model Number");
             }
-            //store.Store.add(new store.Computer(name, model));
+            store.add(new Computer(name, model));
         }catch (Exception e){
-            JOptionPane.showMessageDialog(this,"ERROR",e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
             onInsertComputerClick();
         }
+        
     }
     protected void onInsertOptionClick() {
         try{
@@ -182,14 +183,32 @@ public class MainWin extends JFrame {
             if(price == null || price.equals("") || cost < 0){
                 throw new IllegalArgumentException("Error: Enter a valid cost!");
             }
-            //store.Store.add(new store.Option(name, cost));
+            store.add(new store.Option(name, cost));
         }catch (Exception e){
-            JOptionPane.showMessageDialog(this,"ERROR",e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
             onInsertOptionClick();
         }
     }
     protected void onViewClick(Record record) {
+        switch (record) {
+            case CUSTOMER:
 
+                break;
+            case COMPUTER:
+
+                break;
+            
+            case OPTION:
+
+                break;
+            
+            case ORDER:
+
+                break;
+
+            default:
+                break;
+        }
     }
 
     protected void onAboutClick() {                 // Display About dialog
@@ -265,4 +284,7 @@ public class MainWin extends JFrame {
 
     private JLabel computers;
     private JLabel customers;
+    
+    private Store store;
+    private JLabel display;
 }
