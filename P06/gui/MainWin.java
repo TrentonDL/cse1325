@@ -172,6 +172,7 @@ public class MainWin extends JFrame {
         // Make everything in the JFrame visible
         setVisible(true);
         
+        store = new Store("ELSA");
     }
     
     // Listeners
