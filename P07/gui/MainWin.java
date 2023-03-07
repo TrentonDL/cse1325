@@ -51,6 +51,9 @@ public class MainWin extends JFrame {
         JMenuBar menubar = new JMenuBar();
         
         JMenu     file        = new JMenu("File");
+        JMenuItem open        = new JMenuItem("Open");
+        JMenuItem save        = new JMenuItem("Save");
+        JMenuItem saveAs      = new JMenuItem("Save As");
         JMenuItem quit        = new JMenuItem("Quit");
 
         JMenu     insert      = new JMenu("Insert");
@@ -67,7 +70,10 @@ public class MainWin extends JFrame {
 
         JMenu     help        = new JMenu("Help");
         JMenuItem about       = new JMenuItem("About");
-
+        
+        open.addActionListener(event -> onOpenClick());
+        save.addActionListener(event -> onSaveClick());
+        saveAs.addActionListener(event -> onSaveAsClick());
         quit.addActionListener(event -> onQuitClick());
 
         icustomer.addActionListener(event -> onInsertCustomerClick());
@@ -81,7 +87,9 @@ public class MainWin extends JFrame {
         about.addActionListener(event -> onAboutClick());
 
         
-        
+        file.add(open);
+        file.add(save);
+        file.add(saveAs);
         file.add(quit);
         insert.add(icustomer);
         insert.add(ioption);
@@ -371,6 +379,18 @@ public class MainWin extends JFrame {
         about.setVisible(true);
     }
     */
+    protected void onOpenClick(){
+
+    }
+
+    protected void onSaveClick(){
+
+    }
+
+    protected void onSaveAsClick(){
+
+    }
+    
     protected void onQuitClick() {System.exit(0);}   // Exit the store
 
     private Store store;
