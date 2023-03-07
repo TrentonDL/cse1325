@@ -106,7 +106,46 @@ public class MainWin extends JFrame {
         toolbar.add(Box.createHorizontalStrut(25));
         
         // Create the 3 buttons using the icons provided
+        JButton bAddCustomer = new JButton(new ImageIcon("gui/resources/add_customer.png"));
+            bAddCustomer.setActionCommand("Insert Customer");
+            bAddCustomer.setToolTipText("Insert Customer");
+            toolbar.add(bAddCustomer);
+            bAddCustomer.addActionListener(event ->onInsertCustomerClick());
+
+        JButton bAddOption = new JButton(new ImageIcon("gui/resources/add_option.png"));
+            bAddOption.setActionCommand("Insert Option");
+            bAddOption.setToolTipText("Insert Option");
+            toolbar.add(bAddOption);
+            bAddOption.addActionListener(event -> onInsertOptionClick());
+
+        JButton bAddComputer = new JButton(new ImageIcon("gui/resources/add_computer.png"));
+            bAddComputer.setActionCommand("Insert Computer");
+            bAddComputer.setToolTipText("Insert Computer");
+            toolbar.add(bAddComputer);
+            bAddComputer.addActionListener(event -> onInsertComputerClick());
         
+        toolbar.add(Box.createHorizontalStrut(25));
+
+        // Create the 3 buttons using the icons provided
+        JButton bViewCustomers = new JButton(new ImageIcon("gui/resources/view_customers.png"));
+            bViewCustomers.setActionCommand("View Customer");
+            bViewCustomers.setToolTipText("View Customers");
+            toolbar.add(bViewCustomers);
+            bViewCustomers.addActionListener(event ->onViewClick(Record.CUSTOMER));
+
+        JButton bViewOptions = new JButton(new ImageIcon("gui/resources/view_options.png"));
+            bViewOptions.setActionCommand("View Options");
+            bViewOptions.setToolTipText("View Options");
+            toolbar.add(bViewOptions);
+            bViewOptions.addActionListener(event -> onViewClick(Record.OPTION));
+
+        JButton bViewComputers = new JButton(new ImageIcon("gui/resources/view_computers.png"));
+            bViewComputers.setActionCommand("View Computers");
+            bViewComputers.setToolTipText("View Computers");
+            toolbar.add(bViewComputers);
+            bViewComputers.addActionListener(event -> onViewClick(Record.COMPUTER));
+        
+        getContentPane().add(toolbar, BorderLayout.PAGE_START);
         // "Horizontal glue" expands as much as possible, pushing the "X" to the right
         toolbar.add(Box.createHorizontalGlue());
         
