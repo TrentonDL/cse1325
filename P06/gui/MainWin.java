@@ -39,7 +39,7 @@ public class MainWin extends JFrame {
     public MainWin(String title) {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 200);
+        setSize(640, 480);
         
         // /////// ////////////////////////////////////////////////////////////////
         // M E N U
@@ -49,26 +49,32 @@ public class MainWin extends JFrame {
         
         JMenu     file        = new JMenu("File");
         JMenuItem quit        = new JMenuItem("Quit");
+
         JMenu     insert      = new JMenu("Insert");
         JMenuItem icustomer   = new JMenuItem("Customer");
         JMenuItem ioption     = new JMenuItem("Option");
         JMenuItem icomputer   = new JMenuItem("Computer");
         JMenuItem iorder      = new JMenuItem("Order");
+
         JMenu     view        = new JMenu("View");
         JMenuItem vcustomer   = new JMenuItem("Customer");
         JMenuItem voption     = new JMenuItem("Option");
         JMenuItem vcomputer   = new JMenuItem("Computer");
         JMenuItem vorder      = new JMenuItem("Order");
+
         JMenu     help        = new JMenu("Help");
         JMenuItem about       = new JMenuItem("About");
 
         quit.addActionListener(event -> onQuitClick());
+
         icustomer.addActionListener(event -> onInsertCustomerClick());
         ioption.addActionListener(event -> onInsertOptionClick());
         icomputer.addActionListener(event -> onInsertComputerClick());
+
         vcustomer.addActionListener(event -> onViewClick(Record.CUSTOMER));
         voption.addActionListener(event -> onViewClick(Record.OPTION));
         vcomputer.addActionListener(event -> onViewClick(Record.COMPUTER));
+
         about.addActionListener(event -> onAboutClick());
 
         
@@ -88,19 +94,19 @@ public class MainWin extends JFrame {
         menubar.add(insert);
         menubar.add(view);
         menubar.add(help);
+
         setJMenuBar(menubar);
         
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
-        JToolBar toolbar = new JToolBar("Store Controls");
+        JToolBar toolbar = new JToolBar("ELSA Controls");
 
         // A "horizontal strut" is just a space of the specified pixel width
         toolbar.add(Box.createHorizontalStrut(25));
         
         // Create the 3 buttons using the icons provided
         
-        // Create a toggle button to enable or disable the computer player
         // "Horizontal glue" expands as much as possible, pushing the "X" to the right
         toolbar.add(Box.createHorizontalGlue());
         
@@ -119,17 +125,10 @@ public class MainWin extends JFrame {
         // /////////////////////////// ////////////////////////////////////////////
         // C O M P U T E R  D I S P L A Y
         // Provide a text entry box to show the available Computers
-        computers = new JLabel();
-        computers.setFont(new Font("SansSerif", Font.BOLD, 18));
-        add(computers, BorderLayout.CENTER);
-
-        customers = new JLabel();
-        customers.setFont(new Font("SansSerif", Font.BOLD, 15));
-        add(customers, BorderLayout.CENTER);
-
-        // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
-        // Provide a status bar for game messages
-   
+        display = new JLabel();
+        display.setFont(new Font("SansSerif", Font.BOLD, 14));
+        display.setVerticalAlignment(JLabel.TOP);
+        add(display, BorderLayout.CENTER);
         
         // Make everything in the JFrame visible
         setVisible(true);
@@ -151,7 +150,6 @@ public class MainWin extends JFrame {
             store.add(new Customer(name, email));
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-            onInsertCustomerClick();
         }
     }
 
@@ -168,7 +166,6 @@ public class MainWin extends JFrame {
             store.add(new Computer(name, model));
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-            onInsertComputerClick();
         }
         
     }
@@ -186,29 +183,39 @@ public class MainWin extends JFrame {
             store.add(new store.Option(name, cost));
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-            onInsertOptionClick();
         }
     }
     protected void onViewClick(Record record) {
+        String header = null;
+        Object[] list = null;
         switch (record) {
             case CUSTOMER:
-
+                header = "Our Beloved Customers";
+                list = store.customers();
                 break;
             case COMPUTER:
-
+                header = "Computers for Sale - Cheap!";
+                list = store.computers();
                 break;
-            
             case OPTION:
-
+                header = "Options for our SuperComputers";
+                list = store.options();
                 break;
-            
             case ORDER:
-
+                header = "Orders Placed to Date";
+                list = store.orders();
                 break;
-
             default:
                 break;
         }
+
+        StringBuilder sb = new StringBuilder("<html><p><font size=+2>" 
+                                + header + "</font></p><br/>\n<ol>\n");
+        for(Object i : list) sb.append("<li>" + i.toString().replaceAll("<","&lt;")
+                                        .replaceAll(">", "&gt;")
+                                        .replaceAll("\n", "<br/>") + "</li>\n");
+        sb.append("</ol></html>");
+        display.setText(sb.toString());
     }
 
     protected void onAboutClick() {                 // Display About dialog
@@ -282,9 +289,6 @@ public class MainWin extends JFrame {
     */
     protected void onQuitClick() {System.exit(0);}   // Exit the store
 
-    private JLabel computers;
-    private JLabel customers;
-    
     private Store store;
     private JLabel display;
 }
