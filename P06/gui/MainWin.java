@@ -259,31 +259,57 @@ public class MainWin extends JFrame {
     }
 
     protected void onAboutClick() {                 // Display About dialog
-        JLabel logo = null;
+        /*JLabel logo = null;
         try {
             BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
             logo = new JLabel(new ImageIcon(myPicture));
         } catch(IOException e) {
         }
-        
+        */
         JLabel title = new JLabel("<html>"
-          + "<p><font size=+4>Nim</font></p>"
+          + "<p><font size=+4>ELSA</font></p>"
           + "<p>Version 1.4J</p>"
            + "</html>",
           SwingConstants.CENTER);
+        
+        JLabel subtitle = new JLabel("<html>"
+          + "<p>Exceptional Laptops and Supercomputers Always</p>"
+          + "</html>",
+          SwingConstants.CENTER);
 
+        JLabel version = new JLabel("<html>"
+          + "<p>Version 0.2</p>"
+          + "</html>",
+          SwingConstants.CENTER);
         JLabel artists = new JLabel("<html>"
+          + "<br/><p>Copright 2023 by Trenton D. Laule</p>"
+          + "<p>Licensed under GNU GPL 3.0</p><br/>"
           + "<br/><p>Copyright 2017-2023 by George F. Rice</p>"
           + "<p>Licensed under Gnu GPL 3.0</p><br/>"
-          + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
-          + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
-          + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
-          + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
+
+          + "<br/><p>Add Customer icon based on work by Dreamstate per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/user_3114957</font></p>"
+
+          + "<br/><p>View Customers icon based on work by Ilham Fitrotul Hayat per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/group_694642</font></p>"
+
+          + "<br/><p>Add Option icon based on work by Freepik per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/quantum-computing_4103999</font></p>"
+
+          + "<br/><p>View Options icon based on work by Freepik per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/edge_8002173</font></p>"
+
+          + "<br/><p>Add Computer icon based on work by Freepik per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/laptop_689396</font></p>"
+
+          + "<br/><p>View Computers icon based on work by Futuer per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/computer-networks_9672993</font></p>"
+ 
           + "</html>");
           
          JOptionPane.showMessageDialog(this, 
-             new Object[]{logo, title, artists},
-             "The Game of Nim",
+             new Object[]{title,subtitle,version, artists},
+             "ELSA",
              JOptionPane.PLAIN_MESSAGE
         );
     }
