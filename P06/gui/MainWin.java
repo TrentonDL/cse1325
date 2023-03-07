@@ -89,11 +89,11 @@ public class MainWin extends JFrame {
         menubar.add(view);
         menubar.add(help);
         setJMenuBar(menubar);
-        /* 
+        
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
-        JToolBar toolbar = new JToolBar("Nim Controls");
+        JToolBar toolbar = new JToolBar("Store Controls");
 
         // A "horizontal strut" is just a space of the specified pixel width
         toolbar.add(Box.createHorizontalStrut(25));
@@ -114,7 +114,7 @@ public class MainWin extends JFrame {
         toolbar.addSeparator();
 
         getContentPane().add(toolbar, BorderLayout.PAGE_START);
-        */
+        
         
         // /////////////////////////// ////////////////////////////////////////////
         // C O M P U T E R  D I S P L A Y
@@ -140,18 +140,15 @@ public class MainWin extends JFrame {
     
     protected void onInsertCustomerClick() {
         try{
-            Customer newbieCustomer;
-            String email;
-
             String name = JOptionPane.showInputDialog(this, "Name of the new Customer!","Input Name", JOptionPane.QUESTION_MESSAGE);
-            if(name == null){
+            if(name == null || name.equals("")){
                 throw new IllegalArgumentException("Error: We have to call you something");
             }
-            email = JOptionPane.showInputDialog(this, "Enter Customer's email address: ", "Input Email", JOptionPane.QUESTION_MESSAGE);
-            if(email == null){
+            String email = JOptionPane.showInputDialog(this, "Enter Customer's email address: ", "Input Email", JOptionPane.QUESTION_MESSAGE);
+            if(email == null || name.equals("")){
                 throw new IllegalArgumentException("Error: We need your email address");
             }
-            Store.add(new store.Customer(name, email));
+            //store.Store.add(new store.Customer(name, email));
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,"ERROR",e.getMessage(), JOptionPane.ERROR_MESSAGE);
             onInsertCustomerClick();
@@ -160,14 +157,36 @@ public class MainWin extends JFrame {
 
     protected void onInsertComputerClick() {
         try{
-            Computer newComputer;
-            String name;
-            String model;
-            JButton
+            String name = JOptionPane.showInputDialog(this, "Name of the new Computer: ","Input Computer Name", JOptionPane.QUESTION_MESSAGE);
+            if(name == null || name.equals("")){
+                throw new IllegalArgumentException("Error: Every Computer needs a name");
+            }
+            String model = JOptionPane.showInputDialog(this, "Enter the computer's model name: ", "Input Computer Model", JOptionPane.QUESTION_MESSAGE);
+            if(model == null || model.equals("")){
+                throw new IllegalArgumentException("Error: Gotta have a model Number");
+            }
+            //store.Store.add(new store.Computer(name, model));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"ERROR",e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            onInsertComputerClick();
         }
     }
     protected void onInsertOptionClick() {
-
+        try{
+            String name = JOptionPane.showInputDialog(this, "Enter a name for the Computer part: ","Input Computer Name", JOptionPane.QUESTION_MESSAGE);
+            if(name == null || name.equals("")){
+                throw new IllegalArgumentException("Error: This Option needs a name");
+            }
+            String price = JOptionPane.showInputDialog(this, "Enter the part's cost: ", "Input Computer Model", JOptionPane.QUESTION_MESSAGE);
+            long cost = (long) Double.parseDouble(price) * 100;
+            if(price == null || price.equals("") || cost < 0){
+                throw new IllegalArgumentException("Error: Enter a valid cost!");
+            }
+            //store.Store.add(new store.Option(name, cost));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"ERROR",e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            onInsertOptionClick();
+        }
     }
     protected void onViewClick(Record record) {
 
