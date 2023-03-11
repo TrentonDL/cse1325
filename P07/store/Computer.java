@@ -1,5 +1,7 @@
 package store;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Computer {
@@ -38,6 +40,14 @@ public class Computer {
             return false;
         final Computer that = (Computer) o;
         return (this.toString().equals(that.toString()));
+    }
+
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write(name + '\n');
+        bw.write(model + '\n');
+        for (Option o : options) {
+            o.save(bw);
+        }
     }
 
     private String name;

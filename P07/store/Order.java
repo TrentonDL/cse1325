@@ -1,5 +1,7 @@
 package store;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Order {
@@ -42,6 +44,14 @@ public class Order {
                 return false;
         }
         return true;
+    }
+
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write("" + orderNumber + '\n');
+        customer.save(bw);
+        for (Computer c : computers) {
+            c.save(bw);
+        }
     }
 
     private static long nextOrderNumber = 0;

@@ -1,5 +1,8 @@
 package store;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class Option {
     public Option(String name, long cost) {
         this.name = name;
@@ -26,6 +29,11 @@ public class Option {
             return false;
         final Option that = (Option) o;
         return (that.toString().equals(this.toString()));
+    }
+
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write(name + '\n');
+        bw.write("" + cost + '\n');
     }
 
     protected String name;

@@ -31,14 +31,15 @@ public class Customer {
     }
 
     public void save(BufferedWriter bw) throws IOException{
-        bw.write(name + "\n");
-        bw.write(email + "\n");
+        bw.write(name + '\n');
+        bw.write(email + '\n');
     }
 
     public void Customer(BufferedReader br) throws IOException{
         name = br.readLine();
         email = br.readLine();
     }
+    
     private String name;
     private String email;
 }

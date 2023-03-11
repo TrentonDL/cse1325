@@ -59,14 +59,17 @@ public class Store {
         for (Customer c : customers) {
             c.save(bw);
         }
+
         bw.write(options.size() + "\n");
         for (Option o : options) {
             o.save(bw);
         }
+
         bw.write(computers.size() + "\n");
         for (Computer compt : computers) {
             compt.save(bw);
         }
+        
         bw.write(orders.size() + "\n");
         for (Order odr : orders) {
             odr.save(bw);    
