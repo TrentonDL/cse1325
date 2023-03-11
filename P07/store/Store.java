@@ -1,5 +1,8 @@
 package store;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Store {
@@ -50,9 +53,37 @@ public class Store {
         return this.orders.toArray();
     }
 
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write(name + "\n");
+        bw.write(customers.size() + "\n");
+        for (Customer c : customers) {
+            c.save(bw);
+        }
+        bw.write(options.size() + "\n");
+        for (Option o : options) {
+            o.save(bw);
+        }
+        bw.write(computers.size() + "\n");
+        for (Computer compt : computers) {
+            compt.save(bw);
+        }
+        bw.write(orders.size() + "\n");
+        for (Order odr : orders) {
+            odr.save(bw);    
+        }
+        
+    }
+
+    public void Store(BufferedReader br) throws IOException{
+        name = br.readLine();
+        Customer.Customer(br);
+        Option.Option(br);
+        Computer.Computer(br);
+        Order.Order(br);
+    }
+
     // ///////////////////////////////////////////////////////////
     // Fields
-    
     private String name;
     private ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<Option> options = new ArrayList<>();
