@@ -9,10 +9,12 @@ import javax.swing.JMenuItem;        // menu selection that does something
 import javax.swing.JToolBar;         // row of buttons under the menu
 import javax.swing.JButton;          // regular button
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JToggleButton;    // 2-state button
 import javax.swing.BorderFactory;    // manufacturers Border objects around buttons
 import javax.swing.Box;              // to create toolbar spacer
 import javax.swing.UIManager;        // to access default icons
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.w3c.dom.events.Event;
 
@@ -28,7 +30,12 @@ import javax.swing.SwingConstants;   // useful values for Swing method calls
 
 import javax.imageio.ImageIO;        // loads an image from a file
 
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;                 // opens a file
+import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;          // reports an error reading from a file
 import java.util.ArrayList;
 import java.awt.BorderLayout;        // layout manager for main window
@@ -72,10 +79,34 @@ public class MainWin extends JFrame {
         JMenu     help        = new JMenu("Help");
         JMenuItem about       = new JMenuItem("About");
         
-        fnew.addActionListener(event -> onNewClick());
-        fopen.addActionListener(event -> onOpenClick());
-        fsave.addActionListener(event -> onSaveClick());
-        fsaveAs.addActionListener(event -> onSaveAsClick());
+        fnew.addActionListener(event -> {
+            try {
+                onNewClick();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        });
+        fopen.addActionListener(event -> {
+            try {
+                onOpenClick();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        });
+        fsave.addActionListener(event -> {
+            try {
+                onSaveClick();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Unable to save: " + e, "Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        fsaveAs.addActionListener(event -> {
+            try {
+                onSaveAsClick();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        });
         fquit.addActionListener(event -> onQuitClick());
 
         icustomer.addActionListener(event -> onInsertCustomerClick());
@@ -321,6 +352,12 @@ public class MainWin extends JFrame {
           + "<br/><p>View Customers icon based on work by Ilham Fitrotul Hayat per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/group_694642</font></p>"
 
+          + "<br/><p>Save Customers icon based on work by Ahkam per the Free Icons PNG License</p>"
+          + "<p><font size=-2>https://www.freeiconspng.com/img/12407</font></p>"
+
+          + "<br/><p>Load Customers icon based on work by zuozuozuoJim weibo per the Veryicon License</p>"
+          + "<p><font size=-2>https://www.veryicon.com/icons/internet--web/truckhome/customer-2.html</font></p>"
+
           + "<br/><p>Add Option icon based on work by Freepik per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/quantum-computing_4103999</font></p>"
 
@@ -330,8 +367,14 @@ public class MainWin extends JFrame {
           + "<br/><p>Add Computer icon based on work by Freepik per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/laptop_689396</font></p>"
 
+          + "<br/><p>Save Computer icon based on work by surang per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/save_6078101</font></p>"
+
           + "<br/><p>View Computers icon based on work by Futuer per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/computer-networks_9672993</font></p>"
+
+          + "<br/><p>Load Computers icon based on work by Freepik per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/loading_2209941</font></p>"
  
           + "</html>");
           
@@ -381,24 +424,59 @@ public class MainWin extends JFrame {
         about.setVisible(true);
     }
     */
-    protected void onNewClick(){
-        
+    protected void onNewClick() throws IOException{
+        onSaveAsClick();
     }
 
-    protected void onOpenClick(){
+    protected void onOpenClick() throws IOException {
+        JFileChooser fc = new JFileChooser(filename);
+        FileNameExtensionFilter elsaFilter = new FileNameExtensionFilter("ELSA files", "elsa");
+        fc.addChoosableFileFilter(elsaFilter);
+        fc.setFileFilter(elsaFilter);
 
+        int result = fc.showOpenDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION){
+            filename = fc.getSelectedFile();
+
+            try (BufferedReader br = new BufferedReader(new FileReader(filename))){
+                store = new Store(br.readLine());
+                store.Store(br);
+            }catch (IOException e){
+                JOptionPane.showMessageDialog(this, "Unable to open "+ filename + '\n' + e, "Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
-    protected void onSaveClick(){
-
+    protected void onSaveClick() throws IOException{
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename))){
+            store.save(bw);
+        }catch (IOException e){
+            JOptionPane.showMessageDialog(this, "Unable to open "+ filename + '\n' + e, "Failed", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    protected void onSaveAsClick(){
+    protected void onSaveAsClick() throws IOException{
+        try{
+            final JFileChooser fc = new JFileChooser(filename);
+            FileNameExtensionFilter elsaFiles = new FileNameExtensionFilter("ELSA files", "elsa");
+            fc.addChoosableFileFilter(elsaFiles);
+            fc.setFileFilter(elsaFiles);
 
+            int result = fc.showSaveDialog(this);
+            if(result == JFileChooser.APPROVE_OPTION){
+                filename = fc.getSelectedFile();
+                if(!filename.getAbsolutePath().endsWith(".elsa"))
+                    filename = new File(filename.getAbsolutePath() + ".elsa");
+                onSaveClick();
+            }
+        }catch (IOException e){
+            JOptionPane.showMessageDialog(this, "Unable to open "+ filename + '\n' + e, "Failed", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     protected void onQuitClick() {System.exit(0);}   // Exit the store
 
     private Store store;
     private JLabel display;
+    private File filename;
 }

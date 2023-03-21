@@ -1,5 +1,6 @@
 package store;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +12,27 @@ public class Order {
         this.computers = new ArrayList<>();
     }
 
+    public Order(BufferedReader br) throws IOException{
+        orderNumber = Integer.parseInt(br.readLine());
+        customer = new Customer(br);
+        int numOfComputers = Integer.parseInt(br.readLine());
+        for(int i = 0; i<numOfComputers; ++i){
+            Computer c = new Computer(br);
+            addComputer(c);
+        }
+    }
+
     public void addComputer(Computer computer) {
         this.computers.add(computer);
+    }
+
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write("" + orderNumber + '\n');
+        customer.save(bw);
+        bw.write("" + computers.size() + "\n");
+        for (Computer c : computers) {
+            c.save(bw);
+        }
     }
 
     @Override
@@ -44,14 +64,6 @@ public class Order {
                 return false;
         }
         return true;
-    }
-
-    public void save(BufferedWriter bw) throws IOException{
-        bw.write("" + orderNumber + '\n');
-        customer.save(bw);
-        for (Computer c : computers) {
-            c.save(bw);
-        }
     }
 
     private static long nextOrderNumber = 0;

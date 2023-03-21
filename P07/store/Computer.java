@@ -1,5 +1,6 @@
 package store;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,16 @@ public class Computer {
         this.options = new ArrayList<>();
     }
     
+    public Computer(BufferedReader br) throws IOException{
+        name = br.readLine();
+        model = br.readLine();
+        int numOfOptions = Integer.parseInt(br.readLine());
+        for(int i = 0; i < numOfOptions; ++i){
+            Option o = new Option(br);
+            addOption(o);
+        }
+    }
+
     public void addOption(Option option){
         this.options.add(option);
     }
@@ -21,6 +32,15 @@ public class Computer {
             sum += option.cost();
         }
         return sum;
+    }
+
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write(name + '\n');
+        bw.write(model + '\n');
+        bw.write("" + options.size() + "\n");
+        for (Option o : options) {
+            o.save(bw);
+        }
     }
 
     @Override
@@ -40,14 +60,6 @@ public class Computer {
             return false;
         final Computer that = (Computer) o;
         return (this.toString().equals(that.toString()));
-    }
-
-    public void save(BufferedWriter bw) throws IOException{
-        bw.write(name + '\n');
-        bw.write(model + '\n');
-        for (Option o : options) {
-            o.save(bw);
-        }
     }
 
     private String name;

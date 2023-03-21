@@ -15,6 +15,16 @@ public class Customer {
         }
     }
 
+    public Customer(BufferedReader br) throws IOException{
+        name = br.readLine();
+        email = br.readLine();
+    }
+
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write(name + '\n');
+        bw.write(email + '\n');
+    }
+
     @Override
     public String toString(){
         return name + "(" + email + ")";
@@ -30,16 +40,6 @@ public class Customer {
         return (this.name == that.name) && (this.email == that.email);
     }
 
-    public void save(BufferedWriter bw) throws IOException{
-        bw.write(name + '\n');
-        bw.write(email + '\n');
-    }
-
-    public void Customer(BufferedReader br) throws IOException{
-        name = br.readLine();
-        email = br.readLine();
-    }
-    
     private String name;
     private String email;
 }

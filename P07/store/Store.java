@@ -78,11 +78,29 @@ public class Store {
     }
 
     public void Store(BufferedReader br) throws IOException{
-        name = br.readLine();
-        Customer.Customer(br);
-        Option.Option(br);
-        Computer.Computer(br);
-        Order.Order(br);
+        int customerSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < customerSize; ++i){
+            Customer c = new Customer(br);
+            add(c);
+        }
+
+        int optionSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < optionSize; ++i){
+            Option o = new Option(br);
+            add(o);
+        }
+
+        int computerSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < computerSize; ++i){
+            Computer c = new Computer(br);
+            add(c);
+        }
+
+        int orderSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < orderSize; ++i){
+            Order ord = new Order(br);
+            add(ord);
+        }
     }
 
     // ///////////////////////////////////////////////////////////

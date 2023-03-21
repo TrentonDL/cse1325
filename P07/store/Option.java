@@ -1,5 +1,6 @@
 package store;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
@@ -12,8 +13,18 @@ public class Option {
         }
     }
 
+    public Option(BufferedReader br) throws IOException{
+        name = br.readLine();
+        cost = Long.parseLong(br.readLine());
+    }
+
     public long cost() {
         return this.cost;
+    }
+
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write(name + '\n');
+        bw.write("" + cost + '\n');
     }
 
     @Override
@@ -29,11 +40,6 @@ public class Option {
             return false;
         final Option that = (Option) o;
         return (that.toString().equals(this.toString()));
-    }
-
-    public void save(BufferedWriter bw) throws IOException{
-        bw.write(name + '\n');
-        bw.write("" + cost + '\n');
     }
 
     protected String name;
