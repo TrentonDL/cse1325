@@ -345,7 +345,7 @@ public class MainWin extends JFrame {
     }
 
     protected void onAboutClick() { // Display About dialog
-
+        Canvas logo = new Canvas("gui/resources/logo_base.png");
          
         JLabel title = new JLabel("<html>"
                 + "<p><font size=+4>ELSA</font></p>"

@@ -12,6 +12,32 @@ public class Store {
     public String name() {
         return this.name;
     }
+
+    public void Store(BufferedReader br) throws IOException{
+        int customerSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < customerSize; ++i){
+            Customer c = new Customer(br);
+            add(c);
+        }
+
+        int optionSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < optionSize; ++i){
+            Option o = new Option(br);
+            add(o);
+        }
+
+        int computerSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < computerSize; ++i){
+            Computer c = new Computer(br);
+            add(c);
+        }
+
+        int orderSize = Integer.parseInt(br.readLine());
+        for(int i = 0; i < orderSize; ++i){
+            Order ord = new Order(br);
+            add(ord);
+        }
+    }
     
     // ///////////////////////////////////////////////////////////
     // Customers
@@ -75,32 +101,6 @@ public class Store {
             odr.save(bw);    
         }
         
-    }
-
-    public void Store(BufferedReader br) throws IOException{
-        int customerSize = Integer.parseInt(br.readLine());
-        for(int i = 0; i < customerSize; ++i){
-            Customer c = new Customer(br);
-            add(c);
-        }
-
-        int optionSize = Integer.parseInt(br.readLine());
-        for(int i = 0; i < optionSize; ++i){
-            Option o = new Option(br);
-            add(o);
-        }
-
-        int computerSize = Integer.parseInt(br.readLine());
-        for(int i = 0; i < computerSize; ++i){
-            Computer c = new Computer(br);
-            add(c);
-        }
-
-        int orderSize = Integer.parseInt(br.readLine());
-        for(int i = 0; i < orderSize; ++i){
-            Order ord = new Order(br);
-            add(ord);
-        }
     }
 
     // ///////////////////////////////////////////////////////////
