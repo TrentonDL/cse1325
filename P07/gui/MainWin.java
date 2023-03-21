@@ -393,7 +393,7 @@ public class MainWin extends JFrame {
                 + "</html>");
 
         JOptionPane.showMessageDialog(this,
-                new Object[] { title, subtitle, version, artists },
+                new Object[] { logo, title, subtitle, version, artists },
                 "ELSA",
                 JOptionPane.PLAIN_MESSAGE);
     }
