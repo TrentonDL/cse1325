@@ -7,7 +7,7 @@ int main(int args, char* argv[]){
     string s;
     string s1;
     string s2;
-    int count = 0;
+    int count = 1;
     s2 = argv[count];
 
     while(s2.empty()){
