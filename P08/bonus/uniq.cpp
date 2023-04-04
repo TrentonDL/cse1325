@@ -14,7 +14,7 @@ int main(int args, char* argv[]){
         if(s2.compare(s1) == 1)
             s2 = argv[++count];
         else if(s2.compare(s1) == 0){
-            s.append(s2 + " ");
+            s = s.append(s2 + " ");
             s1 = s2;
             s2 = argv[++count];
         }
