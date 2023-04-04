@@ -3,27 +3,17 @@
 #include <sstream>
 using namespace std;
 
-int main(int args, char* argv[]){
-    string s;
-    string s1;
-    string s2;
-    int count = 1;
-    s2 = argv[count];
+int main(int argc, char* argv[]){
+    string previous{argv[1]};
+    cout << previous << " ";
 
-    while(s2.empty()){
-        if(s2.compare(s1) == 1)
-            s2 = argv[++count];
-        else if(s2.compare(s1) == 0){
-            s = s.append(s2 + " ");
-            s1 = s2;
-            s2 = argv[++count];
+    for(int i = 2; i < argc; ++i){
+        string current{argv[i]};
+        if(current != previous){
+            cout << current << " ";
         }
-        else{
-            s = s.append(s2 + " ");
-            s1 = s2;
-            s2 = argv[++count];
-        }
+        previous = current;
     }
 
-    cout << s << endl;
+    cout << endl;
 }
