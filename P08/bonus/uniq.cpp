@@ -18,6 +18,11 @@ int main(int args, char* argv[]){
             s1 = s2;
             s2 = argv[++count];
         }
+        else{
+            s = s.append(s2 + " ");
+            s1 = s2;
+            s2 = argv[++count];
+        }
     }
 
     cout << s << endl;
