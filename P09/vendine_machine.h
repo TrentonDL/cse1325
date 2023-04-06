@@ -1,3 +1,6 @@
+#ifndef __VENDING_MACHINE_H
+#define __VENDING_MACHINE_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -9,4 +12,6 @@ class vending_machine {
         std::string menu();
     private:
         std::vector<int>* Items;
-}
+};
+
+#endif

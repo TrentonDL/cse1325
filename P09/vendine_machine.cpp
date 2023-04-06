@@ -1,4 +1,4 @@
-#include "vending_maching.h"
+#include "vending_machine.h"
 using namespace std;
 
 class vending_machine{
@@ -11,6 +11,10 @@ class vending_machine{
         }
         menu(){
             cout << "\n= = = = = = = = = = = = = =\nWelcome to UTA Vending\n= = = = = = = = = = = = = = =" << endl;
+            for(int idx: *Items){
+                item::to_string();
+            }
         }
+    
 
-}
+};
