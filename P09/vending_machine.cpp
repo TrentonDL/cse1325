@@ -7,12 +7,13 @@ void vending_machine::add(string name, int price){
     Items->push_back(i);
 };
 void vending_machine::buy(int idex){
-    cout << "##### Buying ";
-    Items[idex]::to_string();
+    cout << "##### Buying " << Items[idex]::to_string();
 };
 string vending_machine::menu(){
     cout << "\n= = = = = = = = = = = = = =\nWelcome to UTA Vending\n= = = = = = = = = = = = = = =" << endl;
-    for(int idx: *Items){
-        Items[idx]::to_string();
+    int count = 0;
+    for(Item i: *Items){
+        cout << count << ") " << i.to_string() << endl;
+        count++;
     }
 };
