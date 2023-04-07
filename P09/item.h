@@ -3,11 +3,12 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 
-class item{
+class Item{
     public:
-        void Item(std::string name, int price);
-        std::string to_string();
+        Item(std::string name, int price);
+        void to_string();
     private:
         std::string _name;
         int _price;

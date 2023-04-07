@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "item.h"
 
 class vending_machine {
     public:
@@ -11,7 +12,7 @@ class vending_machine {
         void buy(int index);
         std::string menu();
     private:
-        std::vector<int>* Items;
+        std::vector<Item>* Items;
 };
 
 #endif
