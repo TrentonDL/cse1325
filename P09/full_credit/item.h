@@ -2,6 +2,8 @@
 #define __ITEM_H
 
 #include <iostream>
+#include <sstream>
+#include <cmath>
 #include <string>
 #include <exception>
 

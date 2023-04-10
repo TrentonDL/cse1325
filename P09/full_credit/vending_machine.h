@@ -2,6 +2,7 @@
 #define __VENDING_MACHINE_H
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include "item.h"
@@ -12,7 +13,7 @@ class vending_machine {
         void buy(int index);
         std::string menu();
     private:
-        std::vector<Item>* Items;
+        std::vector<Item*> Items;
 };
 
 #endif
