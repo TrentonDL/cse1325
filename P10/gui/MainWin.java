@@ -8,6 +8,7 @@ import store.Order;
 
 import javax.swing.JFrame;           // for main window
 import javax.swing.JOptionPane;      // for standard dialogs
+import javax.swing.JPanel;
 // import javax.swing.JDialog;          // for custom dialogs (for alternate About dialog)
 import javax.swing.JMenuBar;         // row of menu selections
 import javax.swing.JMenu;            // menu selection that offers another menu
@@ -176,7 +177,7 @@ public class MainWin extends JFrame {
           toolbar.add(bAddComputer);
           bAddComputer.addActionListener(event -> onInsertComputerClick());
         
-        JButton bAddOrder = new JButton(new ImageIcon());
+        JButton bAddOrder = new JButton(new ImageIcon("gui/resources/add_order.png"));
           bAddOrder.setActionCommand("Insert Order");
           bAddOrder.setToolTipText("Insert Order");
           toolbar.add(bAddOrder);
@@ -348,33 +349,30 @@ public class MainWin extends JFrame {
     
     protected void onInsertOrderClick(){
         try{
-            JComboBox cust;
-
-            setLayout(new GridBagLayout());
-            GridBagConstraints constraints = new GridBagConstraints();
-            constraints.gridwidth = 1;
-            constraints.gridheight = 1; 
-            constraints.weightx = 1; 
-            constraints.weighty = 0; 
-            constraints.insets = new Insets(2, 5, 2, 5); 
-            constraints.fill= GridBagConstraints.BOTH; 
-            constraints.anchor = GridBagConstraints.LINE_START;
-            
-            GridBagConstraints constraintsLabel = (GridBagConstraints) constraints.clone();
-            constraintsLabel.weightx = 0;
-
+            if(store.customers().length == 0){
+                onInsertCustomerClick();
+            }
             JLabel customer = new JLabel("Customer");
-            constraintsLabel.gridx = 0;
-            constraintsLabel.gridy = 0;
-            add(customer, constraintsLabel);
 
-            Object[] optionCustomer = store.customers();
-            cust = new JComboBox<Object>(optionCustomer);
+            JComboBox<Object> cust = new JComboBox<>(store.customers());
             cust.setEditable(true);
-            constraints.gridx = 1;
-            constraints.gridy = 0;
-            constraints.weighty = 0;
-            add(cust, constraints);
+
+            JPanel panel = new JPanel();
+            JButton ok = new JButton("OK");
+            ok.addActionListener(event -> {
+                    setVisible(false); 
+            });
+            panel.add(ok);
+
+            JButton cancel = new JButton("Cancel");
+                    cancel.addActionListener(event -> {
+            setVisible(false);
+            });
+
+            panel.add(cancel);
+
+            pack();
+            setVisible(true);
 
             Order o = new Order((Customer) cust.getSelectedItem());
             store.add(o);
