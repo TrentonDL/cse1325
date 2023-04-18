@@ -46,7 +46,7 @@ import java.awt.image.BufferedImage; // holds an image loaded from a file
 public class MainWin extends JFrame {
     private final String NAME = "ELSA";
     private final String EXTENSION = "elsa";
-    private final String VERSION = "0.3";
+    private final String VERSION = "0.4";
     private final String FILE_VERSION = "1.0";
     private final String MAGIC_COOKIE = "⮚Ě1şà⮘";
     private final String DEFAULT_STORE_NAME = "New " + NAME + " Store";
@@ -66,14 +66,15 @@ public class MainWin extends JFrame {
         JMenu     file       = new JMenu("File");
         JMenuItem anew       = new JMenuItem("New");
         JMenuItem open       = new JMenuItem("Open");
-                  save       = new JMenuItem("Save");
-                  saveAs     = new JMenuItem("Save As");
+        JMenuItem save       = new JMenuItem("Save");
+        JMenuItem saveAs     = new JMenuItem("Save As");
         JMenuItem quit       = new JMenuItem("Quit");
 
         JMenu     insert     = new JMenu("Insert");
         JMenuItem iCustomer  = new JMenuItem("Customer");
         JMenuItem iOption    = new JMenuItem("Option");
         JMenuItem iComputer  = new JMenuItem("Computer");
+        JMenuItem iOrder     = new JMenuItem("Order");
         
         JMenu     view       = new JMenu("View");
         JMenuItem vCustomer  = new JMenuItem("Customers");
@@ -107,6 +108,7 @@ public class MainWin extends JFrame {
         insert.add(iCustomer);
         insert.add(iOption);
         insert.add(iComputer);
+        insert.add(iOrder);
         view.add(vCustomer);
         view.add(vOption);
         view.add(vComputer);
@@ -381,6 +383,9 @@ public class MainWin extends JFrame {
           SwingConstants.CENTER);
 
         JLabel artists = new JLabel("<html>"
+          + "<br/><p>Copright 2023 by Trenton D. Laule</p>"
+          + "<p>Licensed under GNU GPL 3.0</p><br/>"
+
           + "<br/><p>Copyright 2017-2023 by George F. Rice</p>"
           + "<p>Licensed under Gnu GPL 3.0</p><br/>"
 
@@ -405,7 +410,6 @@ public class MainWin extends JFrame {
           + "<br/><p>View Computers icon based on work by Futuer per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/computer-networks_9672993</font></p>"
  
-
           + "<br/><p>New and open icon based on work by IconKanan per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/share_2901214</font></p>"
 

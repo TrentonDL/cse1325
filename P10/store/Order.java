@@ -11,6 +11,7 @@ public class Order {
         this.customer = customer;
         this.orderNumber = nextOrderNumber++;
     }
+
     public Order(BufferedReader br) throws IOException {
         this.orderNumber = Long.parseLong(br.readLine());
         if(nextOrderNumber <= orderNumber) nextOrderNumber = orderNumber + 1;
@@ -19,6 +20,7 @@ public class Order {
         while(numOptions-- > 0)
             computers.add(new Computer(br));
     }
+
     public void save(BufferedWriter bw) throws IOException {
         bw.write(Long.toString(orderNumber) + '\n');
         this.customer.save(bw);
@@ -26,14 +28,22 @@ public class Order {
         for(Computer computer : computers)
             computer.save(bw);
     }
-    
+
+    public long cost(){
+        long cost = 0;
+        for(Computer c : computers) cost += c.cost();
+        return cost;
+    }
+
     public void addComputer(Computer computer) {
         computers.add(computer);
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Order " + orderNumber + " for " + customer);
         for(Computer c : computers) sb.append("\n\n" + c);
+        sb.append("$" + cost());
         return sb.toString();
     }
 
