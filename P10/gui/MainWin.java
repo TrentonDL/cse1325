@@ -9,6 +9,7 @@ import store.Order;
 import javax.swing.JFrame;           // for main window
 import javax.swing.JOptionPane;      // for standard dialogs
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 // import javax.swing.JDialog;          // for custom dialogs (for alternate About dialog)
 import javax.swing.JMenuBar;         // row of menu selections
 import javax.swing.JMenu;            // menu selection that offers another menu
@@ -303,11 +304,22 @@ public class MainWin extends JFrame {
     
     protected void onInsertCustomerClick() {
         try { 
-            store.add(new Customer(
-                JOptionPane.showInputDialog(this, "Customer name", "New Customer", JOptionPane.QUESTION_MESSAGE),
-                JOptionPane.showInputDialog(this, "Customer email", "New Customer", JOptionPane.QUESTION_MESSAGE)
-            ));
-            setDirty(true);
+            JLabel nameLabel = new JLabel("Customer");
+            JTextField name = new JTextField(20);
+            JLabel emailLabel = new JLabel("Email");
+            JTextField email = new JTextField(30);
+
+            Object[] objects = {
+                nameLabel, name,
+                emailLabel, email
+            };
+
+            int button = JOptionPane.showConfirmDialog(this,objects,"New Customer", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+            
+            if(button == JOptionPane.OK_OPTION){
+                Customer c = new Customer((name.getText()) , (email.getText()));
+                store.add(c);
+            }
             onViewClick(Record.CUSTOMER);
         } catch(NullPointerException e) {
         } catch(Exception e) {
@@ -333,14 +345,29 @@ public class MainWin extends JFrame {
             
     protected void onInsertComputerClick() { 
         try { 
-            Computer c = new Computer(
-                JOptionPane.showInputDialog(this, "Computer name", "New Computer", JOptionPane.QUESTION_MESSAGE),
-                JOptionPane.showInputDialog(this, "Computer model", "New Computer", JOptionPane.QUESTION_MESSAGE)
-            );
+            JLabel nameLabel = new JLabel("Computer Name");
+            JTextField name = new JTextField(20);
+            JLabel modelLabel = new JLabel("Model");
+            JTextField model = new JTextField(20);
+
+            Object[] objects = {
+                nameLabel,name,
+                modelLabel, model
+            };
+
+            String nameString = null;
+            String modelString = null;
+            int button = JOptionPane.showConfirmDialog(this, objects, "New Computer", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(button == JOptionPane.OK_OPTION){
+                nameString = name.getText();
+                modelString = model.getText();
+            }
+            Computer c = new Computer(nameString, modelString);
+
             JComboBox<Object> cb = new JComboBox<>(store.options());
             int optionsAdded = 0; // Don't add computers with no options
             while(true) {
-                int button = JOptionPane.showConfirmDialog(this, cb, "Another Option?", JOptionPane.YES_NO_OPTION);
+                button = JOptionPane.showConfirmDialog(this, cb, "Another Option?", JOptionPane.YES_NO_OPTION);
                 if(button != JOptionPane.YES_OPTION) break;
                 c.addOption((Option) cb.getSelectedItem());
                 ++optionsAdded;
@@ -366,12 +393,17 @@ public class MainWin extends JFrame {
             JComboBox<Object> cust = new JComboBox<>(store.customers());
             cust.setEditable(true);
 
-            Object[] objects = {customer, cust};
+            JLabel computer = new JLabel("Computer");
+
+            JComboBox<Object> comp = new JComboBox(store.computers());
+
+            Object[] objects = {customer, cust,computer,comp};
 
             int button = JOptionPane.showConfirmDialog(this, objects, "New Order", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if(button == JOptionPane.OK_OPTION){
                 Order o = new Order((Customer) cust.getSelectedItem());
+                o.addComputer((Computer) comp.getSelectedItem());
                 store.add(o);
             }
 
