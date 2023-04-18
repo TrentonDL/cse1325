@@ -85,6 +85,7 @@ public class MainWin extends JFrame {
         JMenuItem vCustomer  = new JMenuItem("Customers");
         JMenuItem vOption    = new JMenuItem("Options");
         JMenuItem vComputer  = new JMenuItem("Computers");
+        JMenuItem vOrder     = new JMenuItem("Orders");
         
         JMenu     help       = new JMenu("Help");
         JMenuItem about      = new JMenuItem("About");
@@ -103,6 +104,7 @@ public class MainWin extends JFrame {
         vCustomer.addActionListener(event -> onViewClick(Record.CUSTOMER));
         vOption  .addActionListener(event -> onViewClick(Record.OPTION));
         vComputer.addActionListener(event -> onViewClick(Record.COMPUTER));
+        vOrder   .addActionListener(event -> onViewClick(Record.ORDER));
 
         about.addActionListener(event -> onAboutClick());
 
@@ -118,6 +120,7 @@ public class MainWin extends JFrame {
         view.add(vCustomer);
         view.add(vOption);
         view.add(vComputer);
+        view.add(vOrder);
         help.add(about);
         
         menubar.add(file);
@@ -203,6 +206,12 @@ public class MainWin extends JFrame {
           bViewComputers.setToolTipText("View Computers");
           toolbar.add(bViewComputers);
           bViewComputers.addActionListener(event -> onViewClick(Record.COMPUTER));
+
+        JButton bViewOrders = new JButton(new ImageIcon("gui/resources/view_orders.png"));
+          bViewOrders.setActionCommand("View Orders");
+          bViewOrders.setToolTipText("View Orders");
+          toolbar.add(bViewOrders);
+          bViewOrders.addActionListener(event -> onViewClick(Record.ORDER));
         
         getContentPane().add(toolbar, BorderLayout.PAGE_START);
        
@@ -357,25 +366,16 @@ public class MainWin extends JFrame {
             JComboBox<Object> cust = new JComboBox<>(store.customers());
             cust.setEditable(true);
 
-            JPanel panel = new JPanel();
-            JButton ok = new JButton("OK");
-            ok.addActionListener(event -> {
-                    setVisible(false); 
-            });
-            panel.add(ok);
+            Object[] objects = {customer, cust};
 
-            JButton cancel = new JButton("Cancel");
-                    cancel.addActionListener(event -> {
-            setVisible(false);
-            });
+            int button = JOptionPane.showConfirmDialog(this, objects, "New Order", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-            panel.add(cancel);
+            if(button == JOptionPane.OK_OPTION){
+                Order o = new Order((Customer) cust.getSelectedItem());
+                store.add(o);
+            }
 
-            pack();
             setVisible(true);
-
-            Order o = new Order((Customer) cust.getSelectedItem());
-            store.add(o);
         }catch (NullPointerException n){
             JOptionPane.showMessageDialog(this, n, "Order Not Completed", JOptionPane.ERROR_MESSAGE);
         }
@@ -460,6 +460,12 @@ public class MainWin extends JFrame {
 
           + "<br/><p>Save and Save As icons based on work by mavadee per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/download_3580085</font></p>"
+
+          + "<br/><p>New Order Icon based on work by IconPacks per the IconPacks License</p>"
+          + "<p><font size=-2>https://www.iconpacks.net/free-icon/add-to-cart-3046.html</font></p>"
+
+          + "<br/><p>Orders icon based on work by Wichai.wi per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/order_1356594</font></p>"
 
           + "</html>");
           
