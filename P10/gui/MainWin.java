@@ -18,6 +18,7 @@ import javax.swing.JToggleButton;    // 2-state button
 import javax.swing.BorderFactory;    // manufacturers Border objects around buttons
 import javax.swing.Box;              // to create toolbar spacer
 import javax.swing.UIManager;        // to access default icons
+import javax.swing.SpringLayout.Constraints;
 import javax.swing.JLabel;           // text or image holder
 import javax.swing.ImageIcon;        // holds a custom icon
 import javax.swing.JComboBox;        // for selecting from lists
@@ -41,6 +42,9 @@ import java.awt.FlowLayout;          // layout manager for About dialog
 
 import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 
 public class MainWin extends JFrame {
@@ -66,8 +70,8 @@ public class MainWin extends JFrame {
         JMenu     file       = new JMenu("File");
         JMenuItem anew       = new JMenuItem("New");
         JMenuItem open       = new JMenuItem("Open");
-        JMenuItem save       = new JMenuItem("Save");
-        JMenuItem saveAs     = new JMenuItem("Save As");
+                  save       = new JMenuItem("Save");
+                  saveAs     = new JMenuItem("Save As");
         JMenuItem quit       = new JMenuItem("Quit");
 
         JMenu     insert     = new JMenu("Insert");
@@ -93,6 +97,7 @@ public class MainWin extends JFrame {
         iCustomer.addActionListener(event -> onInsertCustomerClick());
         iOption  .addActionListener(event -> onInsertOptionClick());
         iComputer.addActionListener(event -> onInsertComputerClick());
+        iOrder   .addActionListener(event -> onInsertOrderClick());
 
         vCustomer.addActionListener(event -> onViewClick(Record.CUSTOMER));
         vOption  .addActionListener(event -> onViewClick(Record.OPTION));
@@ -123,7 +128,7 @@ public class MainWin extends JFrame {
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
-        JToolBar toolbar = new JToolBar("Nim Controls");
+        JToolBar toolbar = new JToolBar("ELSA Store Controls");
 
        // Add a New ELSA store icon
         JButton anewButton  = new JButton(new ImageIcon("gui/resources/anew.png"));
@@ -170,6 +175,12 @@ public class MainWin extends JFrame {
           bAddComputer.setToolTipText("Insert Computer");
           toolbar.add(bAddComputer);
           bAddComputer.addActionListener(event -> onInsertComputerClick());
+        
+        JButton bAddOrder = new JButton(new ImageIcon());
+          bAddOrder.setActionCommand("Insert Order");
+          bAddOrder.setToolTipText("Insert Order");
+          toolbar.add(bAddOrder);
+          bAddOrder.addActionListener(event -> onInsertOrderClick());
         
         toolbar.add(Box.createHorizontalStrut(25));
 
@@ -333,9 +344,45 @@ public class MainWin extends JFrame {
         } catch(Exception e) {
             JOptionPane.showMessageDialog(this, e, "Computer Not Created", JOptionPane.ERROR_MESSAGE);
         }    
-   
     }
-                        
+    
+    protected void onInsertOrderClick(){
+        try{
+            JComboBox cust;
+
+            setLayout(new GridBagLayout());
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.gridwidth = 1;
+            constraints.gridheight = 1; 
+            constraints.weightx = 1; 
+            constraints.weighty = 0; 
+            constraints.insets = new Insets(2, 5, 2, 5); 
+            constraints.fill= GridBagConstraints.BOTH; 
+            constraints.anchor = GridBagConstraints.LINE_START;
+            
+            GridBagConstraints constraintsLabel = (GridBagConstraints) constraints.clone();
+            constraintsLabel.weightx = 0;
+
+            JLabel customer = new JLabel("Customer");
+            constraintsLabel.gridx = 0;
+            constraintsLabel.gridy = 0;
+            add(customer, constraintsLabel);
+
+            Object[] optionCustomer = store.customers();
+            cust = new JComboBox<Object>(optionCustomer);
+            cust.setEditable(true);
+            constraints.gridx = 1;
+            constraints.gridy = 0;
+            constraints.weighty = 0;
+            add(cust, constraints);
+
+            Order o = new Order((Customer) cust.getSelectedItem());
+            store.add(o);
+        }catch (NullPointerException n){
+            JOptionPane.showMessageDialog(this, n, "Order Not Completed", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     protected void onViewClick(Record record) { 
         String header = null;
         Object[] list = null;
