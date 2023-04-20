@@ -344,7 +344,6 @@ public class MainWin extends JFrame {
 
             if(result != null){
                 Customer c = new Customer(result[0], result[1]);
-                int cHash = c.hashCode();
                 if(store.customers().length == 0){
                     store.add(c);
                     setDirty(true);
@@ -352,13 +351,12 @@ public class MainWin extends JFrame {
                 }
                 else{
                     for(Object i : store.customers()){
-                        if(cHash == i.hashCode())
+                        if(c.hashCode() == i.hashCode())
                             throw new RuntimeException("Duplicate Customer");
-                        
-                        store.add(c);
-                        setDirty(true);
-                        onViewClick(Record.CUSTOMER);
                     }
+                    store.add(c);
+                    setDirty(true);
+                    onViewClick(Record.CUSTOMER);
                 }
             }
         } catch(Exception e) {
@@ -371,9 +369,22 @@ public class MainWin extends JFrame {
             String[] result = UnifiedDialog(new String[]{"Name", "Cost"}, "New Option", "gui/resources/add_option.png");
 
             if(result != null){
-                store.add(new Option(result[0],(long) (100.0 * Double.parseDouble(result[1]))));
-                setDirty(true);
-                onViewClick(Record.OPTION);
+                Option o = new Option(result[0],(long) (100.0 * Double.parseDouble(result[1])));
+                if(store.options().length == 0){
+                    store.add(o);
+                    setDirty(true);
+                    onViewClick(Record.OPTION);
+                }
+                else{
+                    for(Object i : store.options()){
+                        if(o.hashCode() == i.hashCode())
+                            throw new RuntimeException("Duplicate Option");
+                    }
+                    store.add(o);
+                    setDirty(true);
+                    onViewClick(Record.OPTION);
+                }
+
             }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(this, e, "Option Not Created", JOptionPane.ERROR_MESSAGE);
@@ -403,10 +414,22 @@ public class MainWin extends JFrame {
                 c.addOption((Option) cb.getSelectedItem());
                 ++optionsAdded;
             }
+
             if(optionsAdded > 0) {
-                store.add(c);
-                onViewClick(Record.COMPUTER);
-                setDirty(true);
+                if(store.computers().length == 0){
+                    store.add(c);
+                    onViewClick(Record.COMPUTER);
+                    setDirty(true);
+                }
+                else{
+                    for(Object i : store.computers()){
+                        if(c.hashCode() == i.hashCode())
+                            throw new RuntimeException("Duplicate Computer");
+                    }
+                    store.add(c);
+                    onViewClick(Record.COMPUTER);
+                    setDirty(true);
+                }
             }
         } catch(NullPointerException e) {
         } catch(Exception e) {
@@ -453,9 +476,20 @@ public class MainWin extends JFrame {
             }
             
             if(computersAdded > 0) {
-                store.add(o);
-                onViewClick(Record.ORDER);
-                setDirty(true);
+                if(store.orders().length == 0){
+                    store.add(o);
+                    onViewClick(Record.ORDER);
+                    setDirty(true);
+                }
+                else{
+                    for(Object i : store.orders()){
+                        if(o.hashCode() == i.hashCode())
+                            throw new RuntimeException("Duplicate Order");
+                    }
+                    store.add(o);
+                    onViewClick(Record.ORDER);
+                    setDirty(true);
+                }
             }
         } catch(NullPointerException e) {
         } catch(Exception e) {

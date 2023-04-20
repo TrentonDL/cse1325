@@ -14,10 +14,12 @@ public class Customer {
         this.name = name;
         this.email = email;
     }
+    
     public Customer(BufferedReader br) throws IOException {
         this.name = br.readLine();
         this.email = br.readLine();
     }
+
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         bw.write(email + '\n');
@@ -27,6 +29,7 @@ public class Customer {
     public String toString() {
         return name + " (" + email + ")";
     }
+
     @Override
     public boolean equals(Object o) {
         try {

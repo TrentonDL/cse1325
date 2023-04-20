@@ -47,12 +47,6 @@ public class Order {
         return sb.toString();
     }
 
-    // WARNING: The equals method relies on a stable toString method
-    //   that includes ALL significant fields to be compared
-    // This includes the order in which Computer objects were added
-    // A better implementation would sort field computers,
-    //   which would require that Option implement Comparable
-    // We'll leave that as a challenge for the enthusiastic student
     @Override
     public boolean equals(Object o) {
         try {

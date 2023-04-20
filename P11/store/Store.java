@@ -10,7 +10,8 @@ public class Store {
     public Store(String name) {
         this.name = name;
     }
-     public Store(BufferedReader br) throws IOException {
+
+    public Store(BufferedReader br) throws IOException {
         this.name = br.readLine();
         int numOptions = Integer.parseInt(br.readLine());
         while(numOptions-- > 0)
@@ -28,6 +29,7 @@ public class Store {
         while(numOptions-- > 0)
             orders.add(new Order(br));
     }
+
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         
@@ -48,7 +50,8 @@ public class Store {
             order.save(bw);
 
     }
-   public String name() {
+
+    public String name() {
         return this.name;
     }
     

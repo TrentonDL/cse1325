@@ -11,10 +11,12 @@ public class Option {
         this.name = name;
         this.cost = cost;
     }
+    
     public Option(BufferedReader br) throws IOException {
         this.name = br.readLine();
         this.cost = Long.parseLong(br.readLine());
     }
+
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         bw.write("" + Long.toString(cost) + '\n');
@@ -23,11 +25,13 @@ public class Option {
     public long cost() {
         return this.cost;
     }
+
     @Override
     public String toString() {
         long cents = cost % 100;
         return name + " ($" + cost/100 + "." +  ((cents < 10) ? "0" : "") + cents + ")";
     }
+
     @Override
     public boolean equals(Object o) {
         try {
