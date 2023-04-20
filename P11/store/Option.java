@@ -3,6 +3,7 @@ package store;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Option {
     public Option(String name, long cost) {
@@ -39,6 +40,11 @@ public class Option {
         }
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, cost);
+    }
+    
     protected String name;
     protected long cost;
 }

@@ -1,7 +1,7 @@
 package store;
 
 import java.util.ArrayList;
-
+import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -67,6 +67,11 @@ public class Order {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customer, orderNumber, computers);
     }
 
     private Customer customer;

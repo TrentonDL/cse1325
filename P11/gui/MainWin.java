@@ -343,9 +343,23 @@ public class MainWin extends JFrame {
             String[] result = UnifiedDialog(new String[]{"Name", "Email"}, "New Customer", "gui/resources/add_customer.png");
 
             if(result != null){
-                store.add(new Customer(result[0], result[1]));
-                setDirty(true);
-                onViewClick(Record.CUSTOMER);
+                Customer c = new Customer(result[0], result[1]);
+                int cHash = c.hashCode();
+                if(store.customers().length == 0){
+                    store.add(c);
+                    setDirty(true);
+                    onViewClick(Record.CUSTOMER);
+                }
+                else{
+                    for(Object i : store.customers()){
+                        if(cHash == i.hashCode())
+                            throw new RuntimeException("Duplicate Customer");
+                        
+                        store.add(c);
+                        setDirty(true);
+                        onViewClick(Record.CUSTOMER);
+                    }
+                }
             }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(this, e, "Customer Not Created", JOptionPane.ERROR_MESSAGE);
@@ -381,7 +395,7 @@ public class MainWin extends JFrame {
             Computer c = new Computer(result[0], result[1]);
 
             JComboBox<Object> cb = new JComboBox<>(store.options());
-            int optionsAdded = 0; // Don't add computers with no options
+            int optionsAdded = 0;
             while(true) {
                 int button = JOptionPane.showConfirmDialog(this, cb, "Another Option?", 
                     JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
@@ -477,7 +491,7 @@ public class MainWin extends JFrame {
         display.setText(sb.toString());
     }
             
-    protected void onAboutClick() {                 // Display About dialog 
+    protected void onAboutClick() { 
         Canvas logo = new Canvas("gui/resources/logo320.png");
 
         JLabel title = new JLabel("<html>"
@@ -561,5 +575,4 @@ public class MainWin extends JFrame {
     private JMenuItem saveAs;
     private JButton saveButton;
     private JButton saveAsButton;
-
 }

@@ -1,7 +1,7 @@
 package store;
 
 import java.util.ArrayList;
-
+import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -39,13 +39,7 @@ public class Computer {
         for(Option o : options) sb.append("\n  " + o);
         return sb.toString();
     }
-    
-    // WARNING: The equals method relies on a stable toString method
-    //   that includes ALL significant fields to be compared
-    // This includes the order in which Option objects were added
-    // A better implementation would sort field options,
-    //   which would require that Option implement Comparable
-    // We'll leave that as a challenge for the enthusiastic student
+
     @Override
     public boolean equals(Object o) {
         try {
@@ -58,6 +52,11 @@ public class Computer {
         }
     }
     
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, model, options);
+    }
+
     private String name;
     private String model;
     private ArrayList<Option> options = new ArrayList<>();
