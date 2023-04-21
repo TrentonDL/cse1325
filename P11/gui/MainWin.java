@@ -162,7 +162,6 @@ public class MainWin extends JFrame {
         
         toolbar.add(Box.createHorizontalStrut(25));
 
-        // Create the 3 buttons using the icons provided
         JButton bAddCustomer = new JButton(new ImageIcon("gui/resources/add_customer.png"));
           bAddCustomer.setActionCommand("Insert Customer");
           bAddCustomer.setToolTipText("Insert Customer");
@@ -189,7 +188,6 @@ public class MainWin extends JFrame {
         
         toolbar.add(Box.createHorizontalStrut(25));
 
-        // Create the 3 buttons using the icons provided
         JButton bViewCustomers = new JButton(new ImageIcon("gui/resources/view_customers.png"));
           bViewCustomers.setActionCommand("View Customer");
           bViewCustomers.setToolTipText("View Customers");
@@ -219,25 +217,21 @@ public class MainWin extends JFrame {
         
         // /////////////////////////// ////////////////////////////////////////////
         // D I S P L A Y
-        // Provide a label to show data requested by the user
         display = new JLabel();
         display.setFont(new Font("SansSerif", Font.BOLD, 14));
         display.setVerticalAlignment(JLabel.TOP);
         add(display, BorderLayout.CENTER);
 
-        // Make everything in the JFrame visible
         setVisible(true);
         
-        // Start a new store
         onNewClick(DEFAULT_STORE_NAME);
     }
     
-    // Listeners
 
-    // File I/O Methods
 
-   protected void onNewClick() {onNewClick("");}
-   protected void onNewClick(String name) { 
+    protected void onNewClick() {onNewClick("");}
+
+    protected void onNewClick(String name) { 
        if(name.isEmpty()) {
            name = JOptionPane.showInputDialog(this, "Store Name", DEFAULT_STORE_NAME);
            if(name.isEmpty()) name = DEFAULT_STORE_NAME;
@@ -245,8 +239,8 @@ public class MainWin extends JFrame {
        store = new Store(name);
        setDirty(false);
        onViewClick(Record.CUSTOMER);
-   }
-   protected void onOpenClick() { 
+    }
+    protected void onOpenClick() { 
         final JFileChooser fc = new JFileChooser(filename);  // Create a file chooser dialog
         FileFilter elsaFiles = new FileNameExtensionFilter("ELSA files", EXTENSION);
         fc.addChoosableFileFilter(elsaFiles);                // Add "ELSA file" filter
@@ -303,10 +297,8 @@ public class MainWin extends JFrame {
     protected void onQuitClick() {System.exit(0);}   // Exit the game
     
     protected String[] UnifiedDialog(String[] fields, String title, String iconFilename) {
-        // Returning null indicates Cancel or X was clicked
         String[] result = null;
         
-        // Load the icon if available
         ImageIcon icon = null;
         try {
             if(iconFilename != null) 
@@ -314,20 +306,16 @@ public class MainWin extends JFrame {
         } catch(Exception e) {
         }
 
-        // Widgets will include a label and JTextField for each field
         Object[] widgets = new Object[2*fields.length];
             
-        // Create the widget pairs           
         for(int i=0; i<fields.length; ++i) {
             widgets[2*i] = new JLabel("<html><br>" + fields[i] + "</html>");
             widgets[2*i+1] = new JTextField();
         }
         
-        // Show the dialog
         int button = JOptionPane.showConfirmDialog(this, widgets, title,
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
             
-        // If the OK button was pressed, extract result from widgets
         if(button == JOptionPane.OK_OPTION) {
             result = new String[fields.length];
             for(int i=0; i<fields.length; ++i) {
@@ -384,12 +372,10 @@ public class MainWin extends JFrame {
                     setDirty(true);
                     onViewClick(Record.OPTION);
                 }
-
             }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(this, e, "Option Not Created", JOptionPane.ERROR_MESSAGE);
         }
-    
     }
             
     protected void onInsertComputerClick() { 
@@ -399,8 +385,7 @@ public class MainWin extends JFrame {
         } catch(Exception e) {
         }
         try {
-            String[] result = UnifiedDialog(new String[]{"Computer Name", "Computer Model"},
-                "New Computer", "gui/resources/add_computer.png");
+            String[] result = UnifiedDialog(new String[]{"Computer Name", "Computer Model"}, "New Computer", "gui/resources/add_computer.png");
             if(result == null) return;
 
             Computer c = new Computer(result[0], result[1]);
@@ -408,8 +393,7 @@ public class MainWin extends JFrame {
             JComboBox<Object> cb = new JComboBox<>(store.options());
             int optionsAdded = 0;
             while(true) {
-                int button = JOptionPane.showConfirmDialog(this, cb, "Another Option?", 
-                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+                int button = JOptionPane.showConfirmDialog(this, cb, "Another Option?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
                 if(button != JOptionPane.YES_OPTION) break;
                 c.addOption((Option) cb.getSelectedItem());
                 ++optionsAdded;
@@ -455,8 +439,7 @@ public class MainWin extends JFrame {
             if(customers.length > 1) {
                 JLabel label = new JLabel("Order for which Customer?");
                 JComboBox<Object> cb = new JComboBox<>(customers);
-                int button = JOptionPane.showConfirmDialog(this, new Object[]{label, cb}, "New Order", 
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+                int button = JOptionPane.showConfirmDialog(this, new Object[]{label, cb}, "New Order", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
                 if(button != JOptionPane.OK_OPTION) return;
                 customer = (Customer) cb.getSelectedItem();
             }
@@ -466,8 +449,7 @@ public class MainWin extends JFrame {
             int computersAdded = 0;
             while(true) {
                 JLabel label = new JLabel("<html><p>" + o.toString().replaceAll("\n", "<br/>") + "</p></html>");
-                int button = JOptionPane.showConfirmDialog(this, new Object[]{label, cb}, "Another Computer?", 
-                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+                int button = JOptionPane.showConfirmDialog(this, new Object[]{label, cb}, "Another Computer?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
                     
                 if(button != JOptionPane.YES_OPTION) break;
                 
@@ -600,8 +582,8 @@ public class MainWin extends JFrame {
     };
 
 
-    private Store store;                    // The current Elsa store    
-    private JLabel display;                 // Display page of data
+    private Store store;  
+    private JLabel display;
 
     private File filename;
     
