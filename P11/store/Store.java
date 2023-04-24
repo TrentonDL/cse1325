@@ -2,6 +2,7 @@ package store;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.HashSet;
 
 import java.io.BufferedReader;
@@ -50,7 +51,6 @@ public class Store {
         bw.write("" + orders.size() + '\n');
         for(Order order : orders)
             order.save(bw);
-
     }
 
     public String name() {
@@ -101,8 +101,8 @@ public class Store {
     // Fields
     
     private String name;
-    private ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<Option> options = new ArrayList<>();
-    private ArrayList<Computer> computers = new ArrayList<>();
-    private ArrayList<Order> orders = new ArrayList<>();
+    private TreeSet<Customer> customers = new TreeSet<>();
+    private HashSet<Option> options = new HashSet<>();
+    private HashSet<Computer> computers = new HashSet<>();
+    private HashSet<Order> orders = new HashSet<>();
 }

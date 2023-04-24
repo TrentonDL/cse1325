@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Customer {
+public class Customer implements Comparable {
     public Customer(String name, String email) {
         int atIndex = email.indexOf('@', 0);
         int dotIndex = (atIndex >= 0) ? email.indexOf('@', 0) : -1;
@@ -46,7 +46,17 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(name,email);
     }
-    
+
+    @Override
+    public int compareTo(Object o) {
+        Customer c = (Customer) o;
+        if(this.name.compareTo(c.name) == 0) 
+            return this.email.compareTo(c.email);
+        else
+            return this.name.compareTo(c.name);
+    }
+
     private String name;
     private String email;
+
 }
