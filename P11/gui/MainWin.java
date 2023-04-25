@@ -267,6 +267,10 @@ public class MainWin extends JFrame {
     }
 
     protected void onSaveClick() {
+        if(filename == null){
+            this.onSaveAsClick();
+            return;
+        }
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
             bw.write(MAGIC_COOKIE + '\n');
             bw.write(FILE_VERSION + '\n');

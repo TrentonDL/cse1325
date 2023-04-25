@@ -59,5 +59,4 @@ public class Customer implements Comparable, Saveable {
 
     private String name;
     private String email;
-
 }
