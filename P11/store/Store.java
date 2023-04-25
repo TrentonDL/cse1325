@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.HashSet;
-
+import java.util.Set;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -97,6 +97,14 @@ public class Store {
         return this.orders.toArray();
     }
 
+
+    private void save(BufferedWriter br, Set s)throws IOException{
+        br.write(" " + s.size() + '\n');
+        Class<?> type  = s.getClass();
+        for(Object o: s){
+            ((type) o).save(br);
+        }
+    }
     // ///////////////////////////////////////////////////////////
     // Fields
     
