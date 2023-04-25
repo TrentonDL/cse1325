@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Customer implements Comparable {
+public class Customer implements Comparable, Saveable {
     public Customer(String name, String email) {
         int atIndex = email.indexOf('@', 0);
         int dotIndex = (atIndex >= 0) ? email.indexOf('@', 0) : -1;
@@ -20,6 +20,7 @@ public class Customer implements Comparable {
         this.email = br.readLine();
     }
 
+    @Override
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         bw.write(email + '\n');

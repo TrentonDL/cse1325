@@ -6,11 +6,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class Computer {
+public class Computer implements Saveable{
     public Computer(String name, String model) {
         this.name = name;
         this.model = model;
     }
+
     public Computer(BufferedReader br) throws IOException {
         this.name = br.readLine();
         this.model = br.readLine();
@@ -18,6 +19,8 @@ public class Computer {
         while(numOptions-- > 0)
             options.add(new Option(br));
     }
+
+    @Override
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         bw.write(model + '\n');
@@ -25,14 +28,17 @@ public class Computer {
         for(Option option : options)
             option.save(bw);
     }
+
     public void addOption(Option option) {
         options.add(option);
     }
+
     public long cost() {
         long cost = 0;
         for(Option o : options) cost += o.cost();
         return cost;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(name + " (" + model + "}");
