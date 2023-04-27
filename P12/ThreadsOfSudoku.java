@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.io.File;
@@ -17,6 +18,10 @@ public class ThreadsOfSudoku {
             System.out.println(sud + "\n\n");
             
             int numThreads = Integer.parseInt(args[0]);
+            if(numThreads == 0 || numThreads > 82){
+                System.err.println("Error: Thread count not possible");
+                System.exit(-1);
+            }
             
             // Split the search field into 81 different sub-puzzles
             int index = 0;
@@ -32,9 +37,33 @@ public class ThreadsOfSudoku {
             //   with a "thread ID" hard-coded as 1.
             // Your job is to rewrite this to create numThreads threads, with
             //   the set of Sudoku candidate solutions split between them
-            //   (for example, 0 to 40 for the first thread and 41-81 for the second).           
-            solveSuds(0, suds.length-1, 1);
+            //   (for example, 0 to 40 for the first thread and 41-81 for the second).
+            ArrayList<Thread> threads = new ArrayList<>();
+            if(numThreads > 1 && numThreads < 81){
 
+                int splitNum = 81/numThreads;
+                for(int i=0;i<numThreads; i++){
+                    final int j = i;
+                    if(i == 0){
+                        threads.add(new Thread(() -> solveSuds(splitNum*j, (splitNum*j)+splitNum, j)));
+                    }
+                    else if((splitNum*j) + splitNum >= 81){
+                        threads.add(new Thread(() -> solveSuds(splitNum*j+1, 80, j)));
+                    }
+                    else{
+                        threads.add(new Thread(() -> solveSuds(splitNum*j+1, (splitNum*j)+splitNum, j)));
+                    }
+                }
+                for (Thread t : threads) {
+                    t.start();
+                }
+                for (Thread t : threads) {
+                    t.join();
+                }
+            }
+            else{
+                solveSuds(0, suds.length-1, 1);
+            }
             // END WORK HERE
                         
             // Show the solution(s), if any
